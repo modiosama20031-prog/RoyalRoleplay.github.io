@@ -35,16 +35,21 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
-        .forum-card:hover {
-            background: rgba(249, 115, 22, 0.05);
-            border-left: 4px solid #f97316;
-            transition: all 0.3s ease;
+        .forum-row:hover {
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.2s ease;
         }
-        
-        /* Modal styling */
-        .modal-bg {
-            background-color: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(5px);
+        /* تصميم قائمة الحساب المنسدلة */
+        .dropdown-menu {
+            display: none;
+            animation: fadeIn 0.2s ease-out;
+        }
+        .dropdown-menu.show {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -61,88 +66,181 @@
                     <div class="flex items-center space-x-8 bg-white/5 px-6 py-2 rounded-full border border-white/10">
                         <a href="index.html" class="text-gray-300 font-medium text-sm hover:text-white transition">Home</a>
                         <a href="index.html#features" class="text-gray-300 font-medium text-sm hover:text-white transition">Features</a>
-                        <a href="index.html#start" class="text-gray-300 font-medium text-sm hover:text-white transition">How to Play</a>
-                        <a href="forum.html" class="text-white border-b-2 border-primary pb-1 font-bold text-sm transition">Forum</a>
+                        <a href="forum.html" class="text-white border-b-2 border-primary pb-1 font-bold text-sm transition">Forums</a>
+                        <a href="#" class="text-gray-300 font-medium text-sm hover:text-white transition">What's new</a>
                     </div>
                 </div>
 
                 <div class="flex items-center">
                     <div id="logged-out-view" class="flex items-center space-x-4">
-                        <a href="login.html" class="text-sm text-gray-400 hover:text-white transition">Sign In</a>
-                        <a href="register.html" class="bg-primary hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-full text-sm shadow-lg transition">Register</a>
+                        <a href="login.html" class="text-sm text-gray-400 hover:text-white transition font-medium"><i class="fas fa-sign-in-alt mr-1"></i> Log in</a>
+                        <a href="register.html" class="bg-primary hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-full text-sm shadow-lg transition"><i class="fas fa-user-plus mr-1"></i> Register</a>
                     </div>
 
-                    <div id="logged-in-view" class="hidden items-center space-x-4">
-                        <div class="flex items-center space-x-2 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                    <div id="logged-in-view" class="hidden items-center relative">
+                        <button id="profile-btn" class="flex items-center space-x-2 bg-white/5 px-4 py-2 rounded-full border border-white/10 hover:bg-white/10 transition focus:outline-none">
                             <i class="fas fa-user-circle text-primary text-lg"></i>
                             <span id="user-display-name" class="text-sm text-white font-semibold tracking-wide">Player</span>
-                        </div>
-                        <button id="logout-btn" class="text-sm text-gray-400 hover:text-red-400 transition font-medium">
-                            <i class="fas fa-sign-out-alt mr-1"></i> Sign Out
+                            <i class="fas fa-chevron-down text-xs text-gray-400 ml-1"></i>
                         </button>
+                        
+                        <div id="profile-dropdown" class="dropdown-menu absolute right-0 top-12 w-56 bg-warmLighter border border-white/10 rounded-xl shadow-2xl py-2 z-50">
+                            <div class="px-4 py-3 border-b border-white/5 mb-2">
+                                <p class="text-xs text-gray-400">Signed in as</p>
+                                <p id="dropdown-email" class="text-sm font-bold text-white truncate">email@example.com</p>
+                            </div>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-primary transition"><i class="fas fa-id-card w-5"></i> Account details</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-primary transition"><i class="fas fa-lock w-5"></i> Password and security</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-primary transition"><i class="fas fa-cog w-5"></i> Preferences</a>
+                            <div class="border-t border-white/5 my-2"></div>
+                            <button id="logout-btn" class="w-full text-left block px-4 py-2 text-sm text-red-400 hover:bg-white/5 transition"><i class="fas fa-sign-out-alt w-5"></i> Log out</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="pt-36 px-4 max-w-7xl mx-auto flex justify-between items-end">
-        <div>
-            <h1 class="font-heading font-extrabold text-4xl text-white tracking-tight uppercase"><span class="text-primary">Royal RP</span> Forums</h1>
-            <p class="mt-2 text-gray-400">Welcome to our community. Share your thoughts and stories.</p>
-        </div>
-        
-        <button id="open-modal-btn" class="hidden bg-white text-black font-bold py-3 px-6 rounded-xl hover:bg-gray-200 transition shadow-lg items-center">
-            <i class="fas fa-plus mr-2"></i> Create Thread
-        </button>
-    </div>
-
-    <div class="pb-12 px-4 max-w-7xl mx-auto">
-        
-        <div class="mt-12">
-            <div class="bg-gradient-to-r from-primary/20 to-transparent border-l-4 border-primary px-5 py-3 mb-4 rounded-r-lg">
-                <h2 class="font-heading font-bold text-xl text-white uppercase tracking-wider">Live Feed</h2>
+    <div class="pt-32 pb-8 px-4 border-b border-white/5 bg-gradient-to-b from-primary/10 to-transparent">
+        <div class="max-w-7xl mx-auto flex justify-between items-end">
+            <div>
+                <h1 class="font-heading font-extrabold text-3xl md:text-4xl text-white tracking-tight">Royal RolePlay Forums</h1>
             </div>
-            
-            <div id="posts-container" class="glass-panel rounded-3xl overflow-hidden divide-y divide-white/5">
-                <div class="p-8 text-center text-gray-500 text-sm">
-                    <i class="fas fa-circle-notch fa-spin text-2xl mb-3 text-primary"></i>
-                    <p>Loading server data...</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="post-modal" class="fixed inset-0 z-[100] modal-bg hidden flex items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-2xl rounded-3xl p-8 relative">
-            <button id="close-modal-btn" class="absolute top-6 right-6 text-gray-400 hover:text-white transition">
-                <i class="fas fa-times text-xl"></i>
+            <button id="new-post-btn" class="hidden bg-primary hover:bg-orange-600 text-white font-bold py-2.5 px-5 rounded-lg transition shadow-lg items-center text-sm">
+                <i class="fas fa-pen mr-2"></i> NEW POSTS
             </button>
-            
-            <h3 class="font-heading font-bold text-2xl text-white mb-6">Create New Thread</h3>
-            
-            <form id="create-post-form" class="space-y-5">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Thread Title</label>
-                    <input type="text" id="post-title" required class="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Message</label>
-                    <textarea id="post-content" required rows="5" class="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none resize-none"></textarea>
-                </div>
-                <div class="flex justify-end space-x-3 pt-2">
-                    <button type="button" id="cancel-modal-btn" class="px-6 py-3 rounded-xl text-gray-300 font-medium hover:bg-white/5 transition">Cancel</button>
-                    <button type="submit" class="bg-primary hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg">Post Thread</button>
-                </div>
-            </form>
         </div>
+    </div>
+
+    <div class="py-12 px-4 max-w-7xl mx-auto space-y-8">
+        
+        <div>
+            <div class="bg-gradient-to-r from-primary/80 to-primary/40 px-4 py-3 rounded-t-xl border border-primary/50">
+                <h2 class="font-heading font-bold text-lg text-white"><i class="fas fa-server mr-2"></i> Server #1 | EN</h2>
+            </div>
+            
+            <div class="glass-panel border-t-0 rounded-b-xl overflow-hidden divide-y divide-white/5">
+                
+                <div class="forum-row flex items-center p-4">
+                    <div class="flex-shrink-0 w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-gray-400">
+                        <i class="fas fa-book text-xl"></i>
+                    </div>
+                    <div class="ml-4 flex-grow">
+                        <a href="#" class="text-base font-bold text-white hover:text-primary transition">Server Rules</a>
+                        <p class="text-xs text-gray-500 mt-0.5">Rules of State, General Rules, and Ghetto Rules.</p>
+                    </div>
+                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
+                        <span class="text-sm font-bold text-white">7</span>
+                        <span class="text-[10px] text-gray-500 uppercase">Threads</span>
+                    </div>
+                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
+                        <span class="text-sm font-bold text-white">7</span>
+                        <span class="text-[10px] text-gray-500 uppercase">Messages</span>
+                    </div>
+                    <div class="hidden lg:block w-48 text-right pl-4 border-l border-white/5">
+                        <p class="text-xs text-primary font-bold">Important: Rules of State</p>
+                        <p class="text-xs text-gray-500 mt-1">Apr 8, 2026 • Admin</p>
+                    </div>
+                </div>
+
+                <div class="forum-row flex items-center p-4">
+                    <div class="flex-shrink-0 w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-gray-400">
+                        <i class="fas fa-gavel text-xl"></i>
+                    </div>
+                    <div class="ml-4 flex-grow">
+                        <a href="#" class="text-base font-bold text-white hover:text-primary transition">Complaints</a>
+                        <p class="text-xs text-gray-500 mt-0.5">Report players who break the server rules here.</p>
+                    </div>
+                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
+                        <span class="text-sm font-bold text-white">56</span>
+                        <span class="text-[10px] text-gray-500 uppercase">Threads</span>
+                    </div>
+                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
+                        <span class="text-sm font-bold text-white">198</span>
+                        <span class="text-[10px] text-gray-500 uppercase">Messages</span>
+                    </div>
+                    <div class="hidden lg:block w-48 text-right pl-4 border-l border-white/5">
+                        <p class="text-xs text-primary font-bold truncate">Player reported for VDM</p>
+                        <p class="text-xs text-gray-500 mt-1">Yesterday • Mod_Ahmed</p>
+                    </div>
+                </div>
+
+                <div class="forum-row flex items-center p-4">
+                    <div class="flex-shrink-0 w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center text-primary">
+                        <i class="fas fa-file-signature text-xl"></i>
+                    </div>
+                    <div class="ml-4 flex-grow">
+                        <a href="#" class="text-base font-bold text-white hover:text-primary transition">Applications <span class="bg-red-500 text-white text-[9px] px-1.5 py-0.5 rounded ml-1 uppercase">New</span></a>
+                        <p class="text-xs text-gray-500 mt-0.5">Apply for Admin, Helper, or Media status.</p>
+                    </div>
+                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
+                        <span class="text-sm font-bold text-white">477</span>
+                        <span class="text-[10px] text-gray-500 uppercase">Threads</span>
+                    </div>
+                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
+                        <span class="text-sm font-bold text-white">1.8K</span>
+                        <span class="text-[10px] text-gray-500 uppercase">Messages</span>
+                    </div>
+                    <div class="hidden lg:block w-48 text-right pl-4 border-l border-white/5">
+                        <p class="text-xs text-primary font-bold truncate">Leader of LSPD Application</p>
+                        <p class="text-xs text-gray-500 mt-1">Today at 3:20 PM • SpikyMoha</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div>
+            <div class="bg-gradient-to-r from-blue-600/80 to-blue-600/30 px-4 py-3 rounded-t-xl border border-blue-500/50">
+                <h2 class="font-heading font-bold text-lg text-white"><i class="fas fa-shield-alt mr-2"></i> Roleplay Organizations</h2>
+            </div>
+            
+            <div class="glass-panel border-t-0 rounded-b-xl overflow-hidden divide-y divide-white/5">
+                
+                <div class="forum-row flex items-center p-4">
+                    <div class="flex-shrink-0 w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center text-blue-400">
+                        <i class="fas fa-building-shield text-xl"></i>
+                    </div>
+                    <div class="ml-4 flex-grow">
+                        <a href="#" class="text-base font-bold text-white hover:text-blue-400 transition">State organizations</a>
+                        <p class="text-xs text-gray-500 mt-0.5">LSPD, EMS, FIB, National Guard.</p>
+                    </div>
+                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
+                        <span class="text-sm font-bold text-white">6</span>
+                        <span class="text-[10px] text-gray-500 uppercase">Threads</span>
+                    </div>
+                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
+                        <span class="text-sm font-bold text-white">42</span>
+                        <span class="text-[10px] text-gray-500 uppercase">Messages</span>
+                    </div>
+                </div>
+
+                <div class="forum-row flex items-center p-4">
+                    <div class="flex-shrink-0 w-10 h-10 bg-rose-500/10 rounded-full flex items-center justify-center text-rose-400">
+                        <i class="fas fa-mask text-xl"></i>
+                    </div>
+                    <div class="ml-4 flex-grow">
+                        <a href="#" class="text-base font-bold text-white hover:text-rose-400 transition">Ghetto (Gangs)</a>
+                        <p class="text-xs text-gray-500 mt-0.5">Ballas, Families, Vagos, Marabunta, Bloods.</p>
+                    </div>
+                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
+                        <span class="text-sm font-bold text-white">12</span>
+                        <span class="text-[10px] text-gray-500 uppercase">Threads</span>
+                    </div>
+                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
+                        <span class="text-sm font-bold text-white">89</span>
+                        <span class="text-[10px] text-gray-500 uppercase">Messages</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        // Import Firestore Database functions
-        import { getFirestore, collection, addDoc, getDocs, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDZW7T9mxKujkcXoJ81RSp9980xeieGX6k",
@@ -154,147 +252,58 @@
             measurementId: "G-CHTF9VX0GY"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const db = getFirestore(app);
 
         // UI Elements
         const loggedOutView = document.getElementById('logged-out-view');
         const loggedInView = document.getElementById('logged-in-view');
         const userDisplayName = document.getElementById('user-display-name');
+        const dropdownEmail = document.getElementById('dropdown-email');
+        const profileBtn = document.getElementById('profile-btn');
+        const profileDropdown = document.getElementById('profile-dropdown');
         const logoutBtn = document.getElementById('logout-btn');
-        
-        const openModalBtn = document.getElementById('open-modal-btn');
-        const closeModalBtn = document.getElementById('close-modal-btn');
-        const cancelModalBtn = document.getElementById('cancel-modal-btn');
-        const postModal = document.getElementById('post-modal');
-        const createPostForm = document.getElementById('create-post-form');
-        const postsContainer = document.getElementById('posts-container');
+        const newPostBtn = document.getElementById('new-post-btn');
 
-        let currentUser = null;
+        // Dropdown Toggle Logic
+        profileBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // يمنع الصفحة تقفل القائمة فوراً
+            profileDropdown.classList.toggle('show');
+        });
 
-        // 1. Auth State Management
+        // قفل القائمة لو داس في أي مكان فاضي في الصفحة
+        window.addEventListener('click', () => {
+            if (profileDropdown.classList.contains('show')) {
+                profileDropdown.classList.remove('show');
+            }
+        });
+
+        // Auth State Management
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                currentUser = user;
+                // User is Logged In
                 loggedOutView.classList.add('hidden');
                 loggedInView.classList.remove('hidden');
                 loggedInView.classList.add('flex');
+                newPostBtn.classList.remove('hidden');
+                newPostBtn.classList.add('flex');
                 
                 const username = user.email.split('@')[0];
                 userDisplayName.textContent = username;
-                
-                // Show Create Post button
-                openModalBtn.classList.remove('hidden');
-                openModalBtn.classList.add('flex');
+                dropdownEmail.textContent = user.email; // يحط الإيميل جوة القائمة المنسدلة
             } else {
-                currentUser = null;
+                // User is Logged Out
                 loggedInView.classList.add('hidden');
                 loggedInView.classList.remove('flex');
                 loggedOutView.classList.remove('hidden');
-                openModalBtn.classList.add('hidden');
+                newPostBtn.classList.add('hidden');
             }
         });
 
+        // Logout
         logoutBtn.addEventListener('click', () => {
             signOut(auth).then(() => window.location.reload());
         });
-
-        // 2. Modal Logic
-        openModalBtn.addEventListener('click', () => {
-            postModal.classList.remove('hidden');
-        });
-
-        const closeModal = () => {
-            postModal.classList.add('hidden');
-            createPostForm.reset();
-        };
-
-        closeModalBtn.addEventListener('click', closeModal);
-        cancelModalBtn.addEventListener('click', closeModal);
-
-        // 3. Save Post to Database
-        createPostForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            if (!currentUser) return;
-
-            const title = document.getElementById('post-title').value;
-            const content = document.getElementById('post-content').value;
-            const authorName = currentUser.email.split('@')[0];
-
-            try {
-                // Add document to "threads" collection
-                await addDoc(collection(db, "threads"), {
-                    title: title,
-                    content: content,
-                    author: authorName,
-                    createdAt: serverTimestamp()
-                });
-                
-                closeModal();
-                loadPosts(); // Reload posts immediately
-            } catch (error) {
-                console.error("Error adding document: ", error);
-                alert("Failed to create post. Check console.");
-            }
-        });
-
-        // 4. Load Posts from Database
-        async function loadPosts() {
-            try {
-                // Query threads ordered by newest first
-                const q = query(collection(db, "threads"), orderBy("createdAt", "desc"));
-                const querySnapshot = await getDocs(q);
-                
-                postsContainer.innerHTML = ''; // Clear loading spinner
-
-                if (querySnapshot.empty) {
-                    postsContainer.innerHTML = `
-                        <div class="p-8 text-center text-gray-500 text-sm">
-                            <p>No threads yet. Be the first to start a discussion!</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                querySnapshot.forEach((doc) => {
-                    const post = doc.data();
-                    
-                    // Format date (handle case where timestamp might be pending)
-                    const dateString = post.createdAt ? post.createdAt.toDate().toLocaleString() : 'Just now';
-
-                    const postHTML = `
-                        <div class="forum-card flex flex-col md:flex-row p-6">
-                            <div class="flex-shrink-0 w-12 h-12 bg-white/5 text-gray-400 rounded-2xl flex items-center justify-center text-xl mb-4 md:mb-0">
-                                <i class="fas fa-comment-dots"></i>
-                            </div>
-                            <div class="md:ml-6 flex-grow">
-                                <h4 class="text-lg font-bold text-white hover:text-primary transition cursor-pointer mb-1">${post.title}</h4>
-                                <p class="text-sm text-gray-400 line-clamp-2">${post.content}</p>
-                                <div class="flex items-center mt-3 space-x-3 text-xs text-gray-500">
-                                    <span class="text-primary font-medium"><i class="fas fa-user-edit mr-1"></i> ${post.author}</span>
-                                    <span>•</span>
-                                    <span><i class="far fa-clock mr-1"></i> ${dateString}</span>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    postsContainer.innerHTML += postHTML;
-                });
-            } catch (error) {
-                console.error("Error loading posts: ", error);
-                postsContainer.innerHTML = `
-                    <div class="p-8 text-center text-red-400 text-sm">
-                        <p>Error loading server database. Did you enable Firestore yet?</p>
-                    </div>
-                `;
-            }
-        }
-
-        // Run when page loads
-        loadPosts();
     </script>
 </body>
 </html>
