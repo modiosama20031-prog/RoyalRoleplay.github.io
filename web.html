@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal RP | Premium GTA V Roleplay</title>
+    <title>Royal Roleplay | Ultimate GTA V Experience</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script>
         tailwind.config = {
@@ -18,9 +18,9 @@
                     },
                     colors: {
                         primary: '#f97316', 
-                        primaryHover: '#ea580c', 
-                        warmDark: '#1c1715', 
-                        warmLighter: '#261f1c', 
+                        xYellow: '#fbb416', 
+                        xDark: '#1a1412',
+                        xBg: '#120d0b',
                     }
                 }
             }
@@ -28,180 +28,154 @@
     </script>
 
     <style>
-        .hero-bg {
-            background-image: 
-                linear-gradient(to right, rgba(28, 23, 21, 0.95) 0%, rgba(28, 23, 21, 0.7) 50%, rgba(28, 23, 21, 0.2) 100%), 
-                url('bg.png');
+        body { background-color: #120d0b; color: #d1d5db; }
+        .hero-section {
+            background-image: linear-gradient(to right, rgba(26, 20, 18, 0.95) 20%, rgba(26, 20, 18, 0.4) 100%), url('bg.png');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
         }
-
-        .glass-panel {
-            background: rgba(38, 31, 28, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        .content-box {
+            background-color: #1a1412;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
         }
+        .content-box:hover { transform: translateY(-5px); }
     </style>
 </head>
-<body class="bg-warmDark text-gray-300 font-sans antialiased selection:bg-primary selection:text-white">
+<body class="antialiased">
 
-    <nav class="fixed w-full z-50 glass-panel border-b border-white/5 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-24">
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="index.html">
-                        <img src="logo.png" alt="Royal RP Logo" class="h-14 w-auto object-contain transition transform hover:scale-105">
+    <nav class="bg-xDark border-b border-white/5 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
+            <div class="flex items-center space-x-10">
+                <a href="index.html" class="flex-shrink-0">
+                    <img src="logo.png" alt="Royal RP" class="h-10 w-auto">
+                </a>
+                <div class="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-wider">
+                    <a href="index.html" class="text-white border-b-2 border-primary py-5">Home</a>
+                    <a href="forum.html" class="text-gray-400 hover:text-white transition">Forums</a>
+                    <a href="#features" class="text-gray-400 hover:text-white transition">What's new</a>
+                    <a href="#how-to-play" class="text-gray-400 hover:text-white transition">Grand Wiki</a>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-6">
+                <div id="auth-section" class="flex items-center space-x-4 text-sm font-medium">
+                    <a href="login.html" class="text-gray-400 hover:text-white transition flex items-center">
+                        <i class="fas fa-sign-in-alt mr-2"></i> Log in
+                    </a>
+                    <a href="register.html" class="text-gray-400 hover:text-white transition flex items-center">
+                        <i class="fas fa-user-plus mr-2"></i> Register
                     </a>
                 </div>
-                
-                <div class="hidden md:block">
-                    <div class="flex items-center space-x-8 bg-white/5 px-6 py-2 rounded-full border border-white/10">
-                        <a href="index.html" class="text-white border-b-2 border-primary pb-1 font-bold text-sm transition">Home</a>
-                        <a href="#features" class="text-gray-300 font-medium text-sm hover:text-white transition">Features</a>
-                        <a href="#start" class="text-gray-300 font-medium text-sm hover:text-white transition">How to Play</a>
-                        <a href="form.html" class="text-gray-300 font-medium text-sm hover:text-white transition">Forum</a>
-                    </div>
-                </div>
-
-                <div class="flex items-center space-x-6">
-                    <a href="#start" class="bg-primary hover:bg-primaryHover text-white font-semibold py-3 px-8 rounded-full shadow-[0_0_20px_rgba(249,115,22,0.4)] transition transform hover:-translate-y-0.5 text-sm tracking-wide">
-                        Play Now
-                    </a>
-                </div>
+                <button class="text-gray-400 hover:text-white"><i class="fas fa-search"></i></button>
             </div>
         </div>
     </nav>
 
-    <header class="hero-bg min-h-screen flex flex-col justify-center px-4 relative pt-20">
-        <div class="max-w-7xl mx-auto w-full relative z-10">
+    <header class="hero-section w-full py-24 md:py-32 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4">
             <div class="max-w-2xl">
-                <div class="inline-flex items-center space-x-2 glass-panel rounded-full px-4 py-2 mb-8">
-                    <span class="relative flex h-2.5 w-2.5">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
-                    </span>
-                    <span class="text-xs font-semibold tracking-wide text-gray-200">SERVER ONLINE • 1,240 PLAYERS</span>
-                </div>
-
-                <h1 class="font-heading font-extrabold text-6xl md:text-8xl text-white tracking-tight mb-6 leading-tight">
-                    Your City.<br/>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-amber-300">Your Rules.</span>
+                <h1 class="text-5xl md:text-7xl font-heading font-extrabold text-white mb-6 uppercase tracking-tighter">
+                    Welcome!
                 </h1>
-                
-                <p class="text-lg text-gray-300 mb-10 max-w-xl leading-relaxed font-light">
-                    Dive into the most immersive and modern RAGE:MP roleplay experience. Build an empire, join a faction, or live a completely unique life.
+                <p class="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed opacity-90 font-light">
+                    Join the most immersive GTA V Roleplay experience. By registering, you'll gain access to our vibrant community, private messaging, and exclusive server updates.
                 </p>
-
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#start" class="flex items-center justify-center bg-white text-gray-900 hover:bg-gray-100 font-semibold py-4 px-8 rounded-2xl transition transform hover:scale-105">
-                        Get Started <i class="fas fa-arrow-right ml-2 text-primary"></i>
+                <div class="flex flex-wrap gap-4">
+                    <a href="register.html" class="bg-xYellow hover:bg-yellow-500 text-black font-bold py-3.5 px-10 rounded shadow-2xl transition transform hover:scale-105 uppercase italic tracking-wider text-sm">
+                        <i class="fas fa-edit mr-2"></i> Signup Now!
+                    </a>
+                    <a href="https://discord.gg/yourlink" class="bg-white/5 hover:bg-white/10 text-white font-bold py-3.5 px-10 rounded border border-white/10 transition text-sm uppercase">
+                        <i class="fab fa-discord mr-2"></i> Join Discord
                     </a>
                 </div>
             </div>
         </div>
     </header>
 
-    <section id="features" class="py-24 bg-warmLighter relative border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="font-heading font-bold text-4xl text-white mb-4">Why Choose Royal RP?</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto font-light">Experience next-generation roleplay with our custom-built framework, designed from the ground up for performance.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-panel p-8 rounded-3xl hover:bg-white/5 transition duration-300 group border-t border-white/10">
-                    <div class="w-14 h-14 bg-orange-500/20 text-orange-500 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <h3 class="font-heading font-bold text-xl text-white mb-3">Player-Driven Economy</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light">A dynamic market where players control businesses, real estate, and stock values. Your hustle actually matters.</p>
+    <main class="max-w-7xl mx-auto px-4 py-16">
+        
+        <div class="content-box p-6 mb-12 flex flex-col md:flex-row items-center justify-between border-l-4 border-xYellow">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-xYellow/10 rounded-full flex items-center justify-center text-xYellow text-xl">
+                    <i class="fas fa-info-circle"></i>
                 </div>
-
-                <div class="glass-panel p-8 rounded-3xl hover:bg-white/5 transition duration-300 group border-t border-white/10">
-                    <div class="w-14 h-14 bg-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition">
-                        <i class="fas fa-car-side"></i>
-                    </div>
-                    <h3 class="font-heading font-bold text-xl text-white mb-3">Premium Assets</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light">Hundreds of optimized custom vehicles, high-quality clothing packs, and custom-mapped interiors across the city.</p>
-                </div>
-
-                <div class="glass-panel p-8 rounded-3xl hover:bg-white/5 transition duration-300 group border-t border-white/10">
-                    <div class="w-14 h-14 bg-rose-500/20 text-rose-400 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="font-heading font-bold text-xl text-white mb-3">Advanced Factions</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light">Deep systems for LSPD, EMS, and criminal gangs. Enjoy territory control, custom evidence systems, and more.</p>
+                <div>
+                    <h3 class="text-white font-bold">New to Royal Roleplay?</h3>
+                    <p class="text-xs text-gray-400 mt-1">Check out our guide to start your journey in the city today.</p>
                 </div>
             </div>
+            <button class="mt-4 md:mt-0 bg-xYellow text-black text-xs font-bold py-2 px-6 rounded uppercase tracking-widest hover:bg-yellow-500 transition">
+                Learn More
+            </button>
         </div>
-    </section>
 
-    <section id="start" class="py-24 bg-gradient-to-b from-warmLighter to-warmDark relative border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
-                <div class="max-w-2xl">
-                    <h2 class="font-heading font-bold text-4xl text-white mb-4">Start Playing in 3 Steps</h2>
-                    <p class="text-amber-100/60 font-light">No complicated whitelists to start. Just download, connect, and begin your journey.</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="relative pl-8 md:pl-0 md:pt-8">
-                    <div class="absolute left-0 md:left-auto md:top-0 md:relative w-12 h-12 bg-white/5 text-amber-500 font-heading font-bold text-xl rounded-2xl flex items-center justify-center border border-white/10 mb-6">1</div>
-                    <h3 class="font-heading font-bold text-xl text-white mb-2">Grand Theft Auto V</h3>
-                    <p class="text-gray-400 text-sm font-light">Ensure you have a clean, unmodified installation of GTA V from Steam, Epic, or Rockstar.</p>
-                </div>
-
-                <div class="relative pl-8 md:pl-0 md:pt-8">
-                    <div class="absolute left-0 md:left-auto md:top-0 md:relative w-12 h-12 bg-white/5 text-amber-500 font-heading font-bold text-xl rounded-2xl flex items-center justify-center border border-white/10 mb-6">2</div>
-                    <h3 class="font-heading font-bold text-xl text-white mb-2">RAGE Multiplayer</h3>
-                    <p class="text-gray-400 text-sm font-light mb-4">Download the RAGE:MP client to connect to custom servers.</p>
-                    <a href="https://rage.mp/" target="_blank" class="text-primary hover:text-white text-sm font-semibold transition inline-flex items-center">Download Client <i class="fas fa-download ml-2 text-xs"></i></a>
-                </div>
-
-                <div class="relative pl-8 md:pl-0 md:pt-8 glass-panel md:p-8 rounded-3xl md:-mt-8 border-t border-primary/30">
-                    <div class="absolute left-0 md:left-auto md:top-0 md:relative w-12 h-12 bg-gradient-to-br from-primary to-amber-500 text-white font-heading font-bold text-xl rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-primary/40 hidden md:flex">3</div>
-                    <h3 class="font-heading font-bold text-xl text-white mb-2">Join the City</h3>
-                    <p class="text-gray-300 text-sm font-light mb-6">Open RAGE:MP and use our direct connect link to jump right into the action.</p>
-                    <a href="ragemp://play.royalrp.com:22005" class="block w-full bg-white hover:bg-gray-200 text-gray-900 font-semibold py-3 px-4 rounded-xl transition text-center text-sm shadow-lg">
-                        Connect Server
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-warmDark py-16 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-8">
-            
-            <div class="flex items-center">
-                <img src="logo.png" alt="Royal RP Logo" class="h-12 w-auto opacity-80 hover:opacity-100 transition">
+        <div id="features" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="content-box p-8">
+                <div class="text-primary text-4xl mb-6"><i class="fas fa-users"></i></div>
+                <h4 class="text-white text-xl font-bold mb-4">Active Community</h4>
+                <p class="text-sm text-gray-400 leading-relaxed">Meet thousands of players and build your story. Our community is growing every day with new events and interactions.</p>
             </div>
             
-            <div class="flex space-x-6 items-center">
-                <a href="#" target="_blank" class="transition transform hover:scale-110 hover:-translate-y-1" title="Join our Discord">
-                    <img src="discord.png" alt="Discord" class="w-10 h-10 object-contain drop-shadow-md">
-                </a>
-                <a href="#" target="_blank" class="transition transform hover:scale-110 hover:-translate-y-1" title="Follow us on Facebook">
-                    <img src="communication.png" alt="Facebook" class="w-10 h-10 object-contain drop-shadow-md">
-                </a>
-                <a href="#" target="_blank" class="transition transform hover:scale-110 hover:-translate-y-1" title="Subscribe on YouTube">
-                    <img src="youtube.png" alt="YouTube" class="w-10 h-10 object-contain drop-shadow-md">
-                </a>
-                <a href="#" target="_blank" class="transition transform hover:scale-110 hover:-translate-y-1" title="Follow us on TikTok">
-                    <img src="tik-tok.png" alt="TikTok" class="w-10 h-10 object-contain drop-shadow-md">
-                </a>
+            <div class="content-box p-8">
+                <div class="text-primary text-4xl mb-6"><i class="fas fa-balance-scale"></i></div>
+                <h4 class="text-white text-xl font-bold mb-4">Strict Roleplay</h4>
+                <p class="text-sm text-gray-400 leading-relaxed">We maintain high standards of roleplay to ensure an immersive experience for everyone, from legal jobs to underground gangs.</p>
             </div>
 
-            <div class="text-center md:text-right">
-                <p class="text-gray-500 text-xs font-medium mb-1">Not affiliated with Rockstar Games.</p>
-                <p class="text-gray-300 text-sm font-bold">&copy; 2026 Royal RP. All rights reserved.</p>
+            <div class="content-box p-8">
+                <div class="text-primary text-4xl mb-6"><i class="fas fa-tools"></i></div>
+                <h4 class="text-white text-xl font-bold mb-4">Unique Systems</h4>
+                <p class="text-sm text-gray-400 leading-relaxed">Custom-built scripts for banking, housing, and inventory to make your life in the city as realistic as possible.</p>
             </div>
+        </div>
+    </main>
+
+    <footer class="bg-xDark border-t border-white/5 py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center opacity-60">
+            <img src="logo.png" class="h-8 mb-6 md:mb-0">
+            <div class="flex space-x-8 text-xs uppercase tracking-widest">
+                <a href="#" class="hover:text-white">Privacy Policy</a>
+                <a href="#" class="hover:text-white">Terms of Service</a>
+                <a href="#" class="hover:text-white">Contact Us</a>
+            </div>
+            <p class="mt-6 md:mt-0 text-[10px]">© 2026 Royal Roleplay. All Rights Reserved.</p>
         </div>
     </footer>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDZW7T9mxKujkcXoJ81RSp9980xeieGX6k",
+            authDomain: "royelrolplay.firebaseapp.com",
+            projectId: "royelrolplay",
+            storageBucket: "royelrolplay.firebasestorage.app",
+            messagingSenderId: "906026544780",
+            appId: "1:906026544780:web:00eba4b774eb61651ad5a9",
+            measurementId: "G-CHTF9VX0GY"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, (user) => {
+            const authSection = document.getElementById('auth-section');
+            if (user) {
+                const name = user.email.split('@')[0];
+                authSection.innerHTML = `
+                    <div class="flex items-center space-x-4">
+                        <span class="text-white font-bold"><i class="fas fa-user-circle mr-2 text-primary"></i>${name}</span>
+                        <button id="logout-btn" class="text-red-400 hover:text-red-300 text-[10px] uppercase font-bold">Logout</button>
+                    </div>
+                `;
+                document.getElementById('logout-btn').addEventListener('click', () => {
+                    signOut(auth).then(() => window.location.reload());
+                });
+            }
+        });
+    </script>
 </body>
 </html>
