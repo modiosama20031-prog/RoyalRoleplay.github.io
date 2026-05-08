@@ -40,12 +40,12 @@
             min-height: 100vh; 
         }
 
-        /* Particle System (المربعات الطائرة) */
+        /* Particle System - Updated for density and variety */
         .particles-container { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-        .cube { position: absolute; animation: float 15s infinite linear; }
-        @keyframes float { 
-            from { transform: translateY(100vh) rotate(0deg); opacity: 1; } 
-            to { transform: translateY(-10vh) rotate(360deg); opacity: 0; } 
+        .particle { position: absolute; bottom: -50px; }
+        @keyframes floatUp { 
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; } 
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; } 
         }
 
         /* Navigation Line Fix */
@@ -65,7 +65,7 @@
         }
         .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
-        /* البطاقات الشفافة */
+        /* Glassmorphism Cards */
         .feature-card { 
             background: rgba(25, 20, 40, 0.6); 
             backdrop-filter: blur(10px); 
@@ -74,7 +74,7 @@
         }
         .feature-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); }
 
-        /* النص المفرغ (ROYAL) */
+        /* Text Outline */
         .text-outline {
             color: transparent;
             -webkit-text-stroke: 2px #ffffff;
@@ -93,9 +93,27 @@
 
     <nav class="bg-[#0c0914]/90 backdrop-blur-xl border-b border-white/5 sticky top-0 z-50">
         <div class="max-w-[1600px] mx-auto px-6 flex items-center justify-between h-[80px]">
-            <a href="#" class="flex-shrink-0 flex items-center gap-2">
-                <img src="logo.png" alt="Royal Roleplay" class="h-10 w-auto">
-            </a>
+            <div class="flex items-center gap-6">
+                <a href="#" class="flex-shrink-0 flex items-center gap-2">
+                    <img src="logo.png" alt="Royal Roleplay" class="h-10 w-auto">
+                </a>
+
+                <div class="relative group hidden md:block">
+                    <button class="flex items-center text-gray-400 hover:text-white transition font-bold text-[11px] uppercase tracking-widest py-4">
+                        <i class="fas fa-globe mr-2"></i> EN <i class="fas fa-chevron-down ml-2 text-[9px]"></i>
+                    </button>
+                    <div class="absolute left-0 mt-0 w-36 bg-[#1a103c]/95 backdrop-blur-md border border-white/10 rounded-md shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 py-2">
+                        <a href="#" class="block px-4 py-2 text-[11px] font-bold text-gray-300 hover:text-xYellow hover:bg-white/5 transition"><span class="mr-2">🇬🇧</span> English</a>
+                        <a href="#" class="block px-4 py-2 text-[11px] font-bold text-gray-300 hover:text-xYellow hover:bg-white/5 transition"><span class="mr-2">🇫🇷</span> Français</a>
+                        <a href="#" class="block px-4 py-2 text-[11px] font-bold text-gray-300 hover:text-xYellow hover:bg-white/5 transition"><span class="mr-2">🇩🇪</span> Deutsch</a>
+                        <a href="#" class="block px-4 py-2 text-[11px] font-bold text-gray-300 hover:text-xYellow hover:bg-white/5 transition"><span class="mr-2">🇮🇹</span> Italiano</a>
+                        <a href="#" class="block px-4 py-2 text-[11px] font-bold text-gray-300 hover:text-xYellow hover:bg-white/5 transition"><span class="mr-2">🇵🇹</span> Português</a>
+                        <a href="#" class="block px-4 py-2 text-[11px] font-bold text-gray-300 hover:text-xYellow hover:bg-white/5 transition"><span class="mr-2">🇷🇺</span> Русский</a>
+                        <a href="#" class="block px-4 py-2 text-[11px] font-bold text-gray-300 hover:text-xYellow hover:bg-white/5 transition"><span class="mr-2">🇮🇳</span> हिन्दी</a>
+                        <a href="#" class="block px-4 py-2 text-[11px] font-bold text-gray-300 hover:text-xYellow hover:bg-white/5 transition"><span class="mr-2">🇸🇦</span> العربية</a>
+                    </div>
+                </div>
+            </div>
 
             <div class="hidden lg:flex items-center space-x-10 text-[12px] font-black uppercase tracking-widest">
                 <a href="#home" class="nav-link active">Home</a>
@@ -374,30 +392,34 @@
             });
         });
 
-        // Loader
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                setTimeout(() => { loader.style.display = 'none'; }, 800);
-            }, 500);
-        });
-
-        // Particles
+        // Advanced Floating Particles Generator
         const container = document.getElementById('particles');
-        const colors = ['#fbb416', '#ff3d5d', '#2563eb', '#8b5cf6'];
-        for (let i = 0; i < 30; i++) {
-            const cube = document.createElement('div');
-            const size = Math.random() * 10 + 5;
-            cube.className = 'cube';
-            cube.style.width = size + 'px';
-            cube.style.height = size + 'px';
-            cube.style.left = Math.random() * 100 + 'vw';
-            cube.style.animationDelay = Math.random() * 10 + 's';
-            cube.style.animationDuration = Math.random() * 15 + 10 + 's';
-            cube.style.background = colors[Math.floor(Math.random() * colors.length)];
-            cube.style.opacity = '0.1';
-            container.appendChild(cube);
+        const colors = ['#fbb416', '#ff3d5d', '#2563eb', '#8b5cf6', '#4ade80'];
+        
+        for (let i = 0; i < 60; i++) { // Increased number of particles
+            const shape = document.createElement('div');
+            shape.className = 'particle';
+            
+            // Randomize size, position, color, and opacity
+            const size = Math.random() * 15 + 5;
+            shape.style.width = size + 'px';
+            shape.style.height = size + 'px';
+            shape.style.left = Math.random() * 100 + 'vw';
+            shape.style.background = colors[Math.floor(Math.random() * colors.length)];
+            shape.style.opacity = Math.random() * 0.4 + 0.1;
+            
+            // Randomize animation duration and delay to cover the whole screen naturally
+            const duration = Math.random() * 20 + 15;
+            const delay = Math.random() * -30; // Negative delay to pre-populate the screen
+            const rotation = Math.random() * 360;
+            
+            shape.style.animation = `floatUp ${duration}s linear ${delay}s infinite`;
+            
+            // Randomly transform some particles to add variety (diamonds, circles)
+            if (Math.random() > 0.5) shape.style.transform = `rotate(${rotation}deg)`;
+            if (Math.random() > 0.8) shape.style.borderRadius = '50%';
+            
+            container.appendChild(shape);
         }
     </script>
 </body>
