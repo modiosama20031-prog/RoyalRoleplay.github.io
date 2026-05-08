@@ -1,125 +1,66 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In | Royal RP</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        heading: ['Outfit', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: '#f97316', 
-                        primaryHover: '#ea580c', 
-                        warmDark: '#1c1715',
-                        // FIXED: Added warmLighter for consistency
-                        warmLighter: '#261f1c',
-                    }
-                }
-            }
-        }
+        tailwind.config = { theme: { extend: { colors: { primary: '#f97316', warmDark: '#1c1715' } } } }
     </script>
-
     <style>
-        .auth-bg {
-            background-image: 
-                linear-gradient(to right, rgba(28, 23, 21, 0.8) 0%, rgba(28, 23, 21, 0.8) 100%), 
-                url('bg.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            backdrop-filter: blur(8px);
-        }
-
-        .glass-panel {
-            background: rgba(38, 31, 28, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.4);
-        }
-        
-        .custom-input {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        .custom-input:focus {
-            border-color: #f97316;
-            background: rgba(0, 0, 0, 0.4);
-            outline: none;
-            box-shadow: 0 0 15px rgba(249, 115, 22, 0.2);
-        }
+        .auth-bg { background: linear-gradient(rgba(28,23,21,0.8), rgba(28,23,21,0.8)), url('bg.png') center/cover; backdrop-filter: blur(8px); }
+        .glass-panel { background: rgba(38, 31, 28, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
     </style>
 </head>
-<body class="auth-bg min-h-screen flex items-center justify-center text-gray-300 font-sans antialiased selection:bg-primary selection:text-white p-4">
-
-    <a href="index.html" class="absolute top-8 left-8 text-gray-400 hover:text-white transition flex items-center gap-2 group">
-        <div class="w-10 h-10 rounded-full glass-panel flex items-center justify-center group-hover:bg-primary/20 group-hover:border-primary/50 transition">
-            <i class="fas fa-arrow-left"></i>
+<body class="auth-bg min-h-screen flex items-center justify-center p-4 text-gray-300">
+    <div class="glass-panel w-full max-w-md rounded-[2rem] p-10 relative overflow-hidden">
+        <div class="text-center mb-8">
+            <img src="logo.png" class="h-16 mx-auto mb-6">
+            <h2 class="text-3xl font-bold text-white">Welcome Back</h2>
         </div>
-        <span class="font-medium text-sm">Back to Home</span>
-    </a>
-
-    <div class="glass-panel w-full max-w-md rounded-[2rem] p-8 md:p-10 relative overflow-hidden">
-        <div class="absolute -top-20 -right-20 w-40 h-40 bg-primary/30 rounded-full blur-[50px]"></div>
-        
-        <div class="flex justify-center mb-8 relative z-10">
-            <img src="logo.png" alt="Royal RP Logo" class="h-16 w-auto object-contain">
-        </div>
-
-        <div class="text-center mb-8 relative z-10">
-            <h2 class="font-heading font-bold text-3xl text-white mb-2">Welcome Back</h2>
-            <p class="text-sm text-gray-400">Enter your credentials to access your account.</p>
-        </div>
-
-        <form action="#" method="POST" class="space-y-5 relative z-10">
-            <div>
-                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Email or Username</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-500">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <input type="text" placeholder="player@royalrp.com" class="custom-input w-full rounded-xl py-3 pl-11 pr-4 text-white text-sm" required>
-                </div>
-            </div>
-
-            <div>
-                <div class="flex justify-between items-center mb-2">
-                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider">Password</label>
-                    <a href="#" class="text-xs text-primary hover:text-white transition">Forgot password?</a>
-                </div>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-500">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <input type="password" placeholder="••••••••" class="custom-input w-full rounded-xl py-3 pl-11 pr-4 text-white text-sm" required>
-                </div>
-            </div>
-
-            <div class="flex items-center">
-                <input type="checkbox" id="remember" class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-primary focus:ring-primary focus:ring-offset-gray-900">
-                <label for="remember" class="ml-2 block text-sm text-gray-400 select-none cursor-pointer">Remember me</label>
-            </div>
-
-            <button type="submit" class="w-full bg-gradient-to-r from-primary to-amber-500 hover:from-primaryHover hover:to-orange-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-[0_0_20px_rgba(249,115,22,0.3)] transition transform hover:-translate-y-0.5 tracking-wide mt-4">
-                Sign In to Dashboard
-            </button>
+        <form id="login-form" class="space-y-5">
+            <input type="email" id="login-email" placeholder="Email" required class="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none">
+            <input type="password" id="login-password" placeholder="Password" required class="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none">
+            <button type="submit" class="w-full bg-primary hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl transition shadow-lg">Sign In</button>
         </form>
-
-        <p class="mt-8 text-center text-sm text-gray-400 relative z-10">
-            Don't have an account yet? 
-            <a href="register.html" class="text-primary hover:text-white font-semibold transition">Register here</a>
-        </p>
+        <p class="mt-8 text-center text-sm">New here? <a href="register.html" class="text-primary font-semibold">Create Account</a></p>
     </div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDZW7T9mxKujkcXoJ81RSp9980xeieGX6k",
+            authDomain: "royelrolplay.firebaseapp.com",
+            projectId: "royelrolplay",
+            storageBucket: "royelrolplay.firebasestorage.app",
+            messagingSenderId: "906026544780",
+            appId: "1:906026544780:web:00eba4b774eb61651ad5a9",
+            measurementId: "G-CHTF9VX0GY"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert("تم تسجيل الدخول بنجاح! نورت السيرفر.");
+                    window.location.href = "forum.html"; // هيدخله على المنتدى بعد التسجيل
+                })
+                .catch((error) => {
+                    alert("الإيميل أو الباسورد غلط، جرب تاني.");
+                });
+        });
+    </script>
 </body>
 </html>
