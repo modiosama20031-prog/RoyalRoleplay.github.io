@@ -1,35 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In | Royal RP</title>
+    <title>Log in | Royal RP</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <script>
-        tailwind.config = { theme: { extend: { colors: { primary: '#f97316', warmDark: '#1c1715' } } } }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        xYellow: '#fbb416', /* الأصفر الخاص بالمنتدى */
+                        xDark: '#364150',   /* الرمادي الغامق للهيدر والفوتر */
+                        xBg: '#f5f7f9',     /* لون خلفية الفورم */
+                        xInput: '#eef2f5',  /* لون خلفية مربعات الكتابة */
+                    }
+                }
+            }
+        }
     </script>
+
     <style>
-        .auth-bg { background: linear-gradient(rgba(28,23,21,0.8), rgba(28,23,21,0.8)), url('bg.png') center/cover; backdrop-filter: blur(8px); }
-        .glass-panel { background: rgba(38, 31, 28, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
+        body {
+            background-image: 
+                linear-gradient(to right, rgba(28, 23, 21, 0.85) 0%, rgba(28, 23, 21, 0.85) 100%), 
+                url('bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            backdrop-filter: blur(8px);
+        }
     </style>
 </head>
-<body class="auth-bg min-h-screen flex items-center justify-center p-4 text-gray-300">
-    <div class="glass-panel w-full max-w-md rounded-[2rem] p-10 relative overflow-hidden">
-        <div class="text-center mb-8">
-            <img src="logo.png" alt="Royal RP Logo" class="h-16 mx-auto mb-6">
-            <h2 class="text-3xl font-bold text-white">Welcome Back</h2>
+<body class="min-h-screen flex items-center justify-center p-4 antialiased">
+
+    <div class="w-full max-w-[600px]">
+        
+        <div class="bg-white rounded-t-lg rounded-b-lg overflow-hidden shadow-2xl">
+            
+            <div class="bg-xDark px-6 py-4 flex justify-between items-center">
+                <h2 class="text-white text-xl font-semibold">Log in</h2>
+                <a href="index.html" class="text-gray-400 hover:text-white transition" title="Close">
+                    <i class="fas fa-times text-lg"></i>
+                </a>
+            </div>
+
+            <form id="login-form" onsubmit="event.preventDefault();">
+                <div class="bg-white p-6 sm:p-8 space-y-6">
+                    
+                    <div class="flex flex-col sm:flex-row gap-2 sm:gap-4">
+                        <label class="sm:w-1/3 sm:text-right text-sm text-gray-700 font-medium pt-2">Your name or email address:</label>
+                        <div class="sm:w-2/3">
+                            <input type="email" id="login-email" required 
+                                class="w-full bg-xInput border border-gray-200 rounded px-3 py-2 text-sm text-gray-800 focus:outline-none focus:border-gray-400 transition">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-2 sm:gap-4">
+                        <label class="sm:w-1/3 sm:text-right text-sm text-gray-700 font-medium pt-2">Password:</label>
+                        <div class="sm:w-2/3">
+                            <div class="relative">
+                                <input type="password" id="login-password" required 
+                                    class="w-full bg-xInput border border-gray-200 rounded pl-3 pr-20 py-2 text-sm text-gray-800 focus:outline-none focus:border-gray-400 transition">
+                                <button type="button" onclick="togglePassword()" class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500 hover:text-gray-800 font-medium flex items-center gap-1.5 transition">
+                                    <i id="eye-icon" class="fas fa-eye text-xYellow"></i> Show
+                                </button>
+                            </div>
+                            
+                            <a href="#" class="inline-block text-sm text-gray-500 hover:underline mt-3">Forgot your password?</a>
+                            
+                            <div class="flex items-center gap-2 mt-5">
+                                <input type="checkbox" id="stay-logged-in" class="w-4 h-4 accent-xYellow cursor-pointer">
+                                <label for="stay-logged-in" class="text-sm text-gray-700 cursor-pointer">Stay logged in</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-xDark px-6 py-4 flex justify-center border-t border-gray-600">
+                    <button type="submit" class="bg-xYellow hover:bg-yellow-500 text-black font-semibold py-2 px-8 rounded shadow-sm flex items-center gap-2 transition transform hover:scale-[1.02]">
+                        <i class="fas fa-lock text-xs"></i> LOG IN
+                    </button>
+                </div>
+            </form>
         </div>
         
-        <form id="login-form" onsubmit="event.preventDefault();" class="space-y-5">
-            <input type="email" id="login-email" placeholder="Email" required class="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none">
-            <input type="password" id="login-password" placeholder="Password" required class="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none">
-            <button type="submit" class="w-full bg-primary hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl transition shadow-lg">Sign In</button>
-        </form>
-        
-        <p class="mt-8 text-center text-sm">New here? <a href="register.html" class="text-primary font-semibold">Create Account</a></p>
+        <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <span class="text-gray-300 text-sm">Don't have an account?</span>
+            <a href="register.html" class="bg-xYellow hover:bg-yellow-500 text-black font-semibold py-2 px-6 rounded-full text-sm shadow-lg transition transform hover:scale-[1.02]">
+                REGISTER NOW
+            </a>
+        </div>
+
     </div>
+
+    <script>
+        // سكريبت إظهار وإخفاء الباسورد
+        function togglePassword() {
+            const pwdInput = document.getElementById('login-password');
+            const eyeIcon = document.getElementById('eye-icon');
+            
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                pwdInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        }
+    </script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
