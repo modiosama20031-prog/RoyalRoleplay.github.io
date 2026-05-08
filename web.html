@@ -14,18 +14,8 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { 
-                        sans: ['Inter', 'sans-serif'], 
-                        heading: ['Outfit', 'sans-serif'] 
-                    },
-                    colors: { 
-                        xYellow: '#fbb416', 
-                        xDark: '#0a0a0a', 
-                        xBg: '#050505', 
-                        xBlue: '#2563eb', 
-                        xPink: '#ff3d5d',
-                        xGreen: '#4ade80'
-                    }
+                    fontFamily: { sans: ['Inter', 'sans-serif'], heading: ['Outfit', 'sans-serif'] },
+                    colors: { xYellow: '#fbb416', xDark: '#0a0a0a', xBg: '#050505', xBlue: '#2563eb', xPink: '#ff3d5d', xGreen: '#4ade80' }
                 }
             }
         }
@@ -33,56 +23,48 @@
 
     <style>
         body { background-color: #050505; color: #d1d5db; overflow-x: hidden; }
+        .hero-section { background-image: linear-gradient(rgba(0,0,0,0.4), #050505), url('bg.png'); background-size: cover; background-position: center; background-attachment: fixed; height: 100vh; }
         
-        /* Background Hero */
-        .hero-section { 
-            background-image: linear-gradient(rgba(0,0,0,0.4), #050505), url('bg.png'); 
-            background-size: cover; 
-            background-position: center; 
-            background-attachment: fixed;
-            height: 100vh; 
-        }
-
         /* Particle System */
         .particles-container { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
         .cube { position: absolute; background: rgba(251, 180, 22, 0.08); animation: float 15s infinite linear; }
-        @keyframes float { 
-            from { transform: translateY(100vh) rotate(0deg); opacity: 1; } 
-            to { transform: translateY(-10vh) rotate(360deg); opacity: 0; } 
-        }
+        @keyframes float { from { transform: translateY(100vh) rotate(0deg); opacity: 1; } to { transform: translateY(-10vh) rotate(360deg); opacity: 0; } }
 
-        /* Custom Loader */
+        /* Loader */
         #loader { position: fixed; inset: 0; z-index: 9999; background: #000; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s; }
         
-        /* Feature & Info Cards */
-        .feature-card { 
-            background: rgba(255, 255, 255, 0.02); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(255,255,255,0.05); 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        /* Navigation & Active Line Animation */
+        .nav-link { position: relative; color: #9ca3af; transition: color 0.3s ease; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -28px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: #fbb416;
+            box-shadow: 0 0 15px rgba(251, 180, 22, 0.5);
+            transition: width 0.3s ease; /* سرعة حركة الخط */
         }
-        .feature-card:hover { border-color: #fbb416; transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+        
+        /* الكلاس ده بيتحط تلقائياً عن طريق الـ JS */
+        .nav-link.active { color: #fbb416 !important; }
+        .nav-link.active::after { width: 100%; }
 
-        .tag { font-size: 9px; padding: 3px 10px; border-radius: 4px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+        .feature-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .feature-card:hover { border-color: #fbb416; transform: translateY(-8px); }
+
+        .tag { font-size: 9px; padding: 3px 10px; border-radius: 4px; font-weight: 900; text-transform: uppercase; }
         .tag-yellow { background: #fbb416; color: black; }
         .tag-blue { background: #2563eb; color: white; }
         .tag-red { background: #ff3d5d; color: white; }
-        .tag-purple { background: #8b5cf6; color: white; }
-
-        /* Navigation Links */
-        .nav-link { position: relative; transition: 0.3s; }
-        .nav-active { color: #fbb416 !important; }
-        .nav-active::after {
-            content: ''; position: absolute; bottom: -28px; left: 0; width: 100%; height: 3px; background: #fbb416;
-            box-shadow: 0 0 15px rgba(251, 180, 22, 0.5);
-        }
     </style>
 </head>
 <body class="antialiased">
 
     <div id="loader">
         <div class="text-center">
-            <div class="w-16 h-16 border-4 border-xYellow border-t-transparent rounded-full animate-spin mb-4 mx-auto shadow-2xl"></div>
+            <div class="w-16 h-16 border-4 border-xYellow border-t-transparent rounded-full animate-spin mb-4 mx-auto"></div>
             <h2 class="text-white font-heading font-black tracking-[0.4em] uppercase text-sm">Royal RP</h2>
         </div>
     </div>
@@ -94,36 +76,36 @@
             <div class="flex items-center space-x-12">
                 <a href="#"><div class="text-2xl font-black italic text-xYellow tracking-tighter">ROYAL<span class="text-white ml-1 font-black">ROLEPLAY</span></div></a>
                 <div class="hidden lg:flex items-center space-x-8 text-[11px] font-bold uppercase tracking-[0.2em]">
-                    <a href="#" class="nav-link nav-active">Home</a>
-                    <a href="#servers" class="text-gray-400 hover:text-white transition">Our Servers</a>
-                    <a href="#how-to-play" class="text-gray-400 hover:text-white transition">How to start playing</a>
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#servers" class="nav-link">Our Servers</a>
+                    <a href="#how-to-play" class="nav-link">How to start playing</a>
                     <div class="relative group">
-                        <a href="#" class="text-gray-400 hover:text-white transition">Donate</a>
+                        <a href="#donate" class="nav-link">Donate</a>
                         <div class="absolute -top-7 -right-4 bg-gradient-to-r from-orange-600 to-red-500 text-white text-[9px] px-2 py-0.5 rounded-sm font-black animate-bounce">🔥 2X</div>
                     </div>
-                    <a href="#" class="text-gray-400 hover:text-white transition">Forums</a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">Technical Support</a>
+                    <a href="#forums" class="nav-link">Forums</a>
+                    <a href="#support" class="nav-link">Technical Support</a>
                 </div>
             </div>
             <div class="flex items-center space-x-8 text-[11px] font-bold uppercase tracking-widest">
                 <a href="#" class="text-gray-400 hover:text-white transition">Log In</a>
-                <a href="#" class="bg-xYellow text-black px-8 py-3 rounded-sm font-black shadow-xl shadow-orange-500/10 transition-all hover:bg-white hover:scale-105">Join Server</a>
+                <a href="#how-to-play" class="bg-xYellow text-black px-8 py-3 rounded-sm font-black shadow-xl transition-all hover:bg-white hover:scale-105">Join Server</a>
             </div>
         </div>
     </nav>
 
-    <header class="hero-section flex items-center justify-center text-center">
-        <div class="max-w-5xl px-6" data-aos="zoom-out" data-aos-duration="1500">
+    <header id="home" class="hero-section flex items-center justify-center text-center">
+        <div class="max-w-5xl px-6" data-aos="zoom-out">
             <h1 class="font-heading font-black leading-none mb-6 uppercase">
                 <span class="text-xYellow text-5xl md:text-[80px] block mb-2 tracking-tight">Welcome To</span>
-                <span class="text-white text-6xl md:text-[120px] block tracking-tighter filter drop-shadow-2xl">Royal Roleplay</span>
+                <span class="text-white text-6xl md:text-[120px] block tracking-tighter">Royal Roleplay</span>
             </h1>
             <div class="space-y-2 mb-12">
                 <p class="text-xGreen font-black uppercase tracking-[0.3em] text-sm md:text-xl">Experience the most immersive gta 5 rp server</p>
                 <p class="text-gray-400 font-bold uppercase tracking-[0.5em] text-xs">Powered by Rage MP</p>
             </div>
             <div class="flex flex-col md:flex-row items-center justify-center gap-8">
-                <a href="#" class="bg-xBlue hover:bg-blue-700 text-white font-black py-5 px-14 rounded shadow-2xl flex items-center uppercase text-sm tracking-[0.2em] transition-all hover:scale-110">
+                <a href="#" class="bg-xBlue text-white font-black py-5 px-14 rounded shadow-2xl flex items-center uppercase text-sm tracking-[0.2em] transition-all hover:scale-110">
                     <i class="fas fa-user-plus mr-3"></i> Register
                 </a>
                 <div class="flex items-center space-x-3 bg-white/5 px-6 py-4 rounded-lg backdrop-blur-md border border-white/5">
@@ -134,209 +116,122 @@
         </div>
     </header>
 
-    <section id="servers" class="py-32 bg-xDark/50 relative">
+    <section id="servers" class="py-32 bg-xDark/50">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <h2 class="text-6xl font-black uppercase text-white mb-6" data-aos="fade-up">Our Servers</h2>
-            <p class="text-gray-500 uppercase tracking-[0.3em] text-xs mb-24" data-aos="fade-up" data-aos-delay="100">The ultimate destination for professional roleplayers</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto mt-24">
                 <div class="feature-card p-12 rounded-2xl relative text-left" data-aos="fade-right">
                     <div class="absolute top-6 right-6"><span class="tag tag-red animate-pulse">New</span></div>
                     <div class="flex items-center mb-8">
                         <span class="text-4xl mr-4">🇬🇧</span>
                         <div>
                             <h3 class="text-white font-black text-3xl uppercase tracking-tighter">English #1</h3>
-                            <p class="text-gray-500 text-[10px] font-bold uppercase tracking-widest mt-1">United Kingdom • Global Connection</p>
+                            <p class="text-gray-500 text-[10px] font-bold uppercase tracking-widest mt-1">EU West • United Kingdom</p>
                         </div>
                     </div>
-                    <div class="flex justify-between items-center bg-black/40 p-6 rounded-xl mb-10 border border-white/5">
+                    <div class="flex justify-between items-center bg-black/40 p-6 rounded-xl mb-10">
                         <div class="text-center"><p class="text-3xl font-black text-xGreen">352</p><p class="text-[9px] text-gray-500 uppercase font-black">Online</p></div>
                         <div class="text-center"><p class="text-3xl font-black text-white">1000</p><p class="text-[9px] text-gray-500 uppercase font-black">Capacity</p></div>
                         <div class="text-center"><p class="text-3xl font-black text-xYellow">24ms</p><p class="text-[9px] text-gray-500 uppercase font-black">Ping</p></div>
                     </div>
                     <button class="w-full bg-xPink text-white font-black py-5 uppercase text-xs tracking-[0.3em] rounded-sm transition-all hover:bg-white hover:text-black">Connect Now</button>
                 </div>
-
                 <div class="feature-card p-12 rounded-2xl flex items-center justify-center border-dashed border-2 opacity-40 group" data-aos="fade-left">
-                    <div class="text-center">
-                        <h3 class="text-white font-black text-4xl uppercase italic mb-4 group-hover:text-xYellow transition">Coming Soon</h3>
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest">More expansions are on the way.</p>
-                        <button class="mt-8 border border-white/20 text-white font-black py-3 px-10 uppercase text-[10px] tracking-widest rounded-sm hover:bg-white hover:text-black transition">Stay Notified</button>
-                    </div>
+                    <h3 class="text-white font-black text-4xl uppercase italic group-hover:text-xYellow transition">Coming Soon</h3>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="how-to-play" class="py-40 bg-black relative">
+    <section id="how-to-play" class="py-40 bg-black">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-6xl font-black uppercase text-white mb-4" data-aos="fade-up">How to start</h2>
-            <p class="text-xPink font-black uppercase tracking-[0.6em] text-sm mb-24" data-aos="fade-up" data-aos-delay="100">Your Journey</p>
-            
+            <h2 class="text-6xl font-black uppercase text-white mb-24" data-aos="fade-up">How to start</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
                 <div class="text-center group" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-10 text-3xl font-black text-white group-hover:bg-xYellow group-hover:text-black transition-all duration-500 shadow-xl shadow-white/5">1</div>
-                    <div class="feature-card p-12 rounded-xl">
+                    <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-10 text-3xl font-black text-white group-hover:bg-xYellow group-hover:text-black transition-all duration-500">1</div>
+                    <div class="feature-card p-12 rounded-xl text-center">
                         <i class="fab fa-steam text-5xl text-gray-400 mb-8 group-hover:text-xYellow transition"></i>
-                        <h4 class="text-white font-black uppercase mb-6 tracking-tighter text-2xl">Legit GTA V</h4>
-                        <p class="text-gray-500 text-[10px] leading-relaxed uppercase tracking-widest">Own a clean copy of GTA V from Steam, Epic, or Rockstar Social Club.</p>
+                        <h4 class="text-white font-black uppercase mb-6 tracking-tighter text-2xl">Get Licensed</h4>
+                        <p class="text-gray-500 text-[10px] leading-relaxed uppercase tracking-widest">Own a legal copy of GTA V from Steam or Epic Games.</p>
                     </div>
                 </div>
                 <div class="text-center group" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-10 text-3xl font-black text-white group-hover:bg-xYellow group-hover:text-black transition-all duration-500 shadow-xl shadow-white/5">2</div>
-                    <div class="feature-card p-12 rounded-xl">
+                    <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-10 text-3xl font-black text-white group-hover:bg-xYellow group-hover:text-black transition-all duration-500">2</div>
+                    <div class="feature-card p-12 rounded-xl text-center">
                         <i class="fas fa-download text-5xl text-gray-400 mb-8 group-hover:text-xYellow transition"></i>
-                        <h4 class="text-white font-black uppercase mb-6 tracking-tighter text-2xl">RAGEMP Client</h4>
-                        <p class="text-gray-500 text-[10px] leading-relaxed uppercase tracking-widest mb-8">Install the RAGE Multiplayer client to enter the world of Royal RP.</p>
-                        <a href="https://rage.mp/" target="_blank" class="bg-xYellow text-black px-6 py-3 font-black text-[10px] uppercase tracking-widest transition-all hover:bg-white">Download RAGEMP</a>
+                        <h4 class="text-white font-black uppercase mb-6 tracking-tighter text-2xl">Download</h4>
+                        <p class="text-gray-500 text-[10px] leading-relaxed uppercase tracking-widest mb-8">Install the RAGE Multiplayer client.</p>
+                        <a href="https://rage.mp/" target="_blank" class="bg-xYellow text-black px-6 py-3 font-black text-[10px] uppercase tracking-widest transition-all hover:bg-white">RAGEMP.EXE</a>
                     </div>
                 </div>
                 <div class="text-center group" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-10 text-3xl font-black text-white group-hover:bg-xYellow group-hover:text-black transition-all duration-500 shadow-xl shadow-white/5">3</div>
-                    <div class="feature-card p-12 rounded-xl">
+                    <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-10 text-3xl font-black text-white group-hover:bg-xYellow group-hover:text-black transition-all duration-500">3</div>
+                    <div class="feature-card p-12 rounded-xl text-center">
                         <i class="fas fa-search text-5xl text-gray-400 mb-8 group-hover:text-xYellow transition"></i>
                         <h4 class="text-white font-black uppercase mb-6 tracking-tighter text-2xl">Join Server</h4>
-                        <p class="text-gray-500 text-[10px] leading-relaxed uppercase tracking-widest">Search for "Royal RolePlay" in the server list and begin your story.</p>
+                        <p class="text-gray-500 text-[10px] leading-relaxed uppercase tracking-widest">Search for "Royal Roleplay" and begin your story.</p>
                     </div>
                 </div>
             </div>
-            <button class="mt-20 bg-xBlue text-white font-black py-5 px-16 rounded shadow-2xl transition transform hover:scale-110 uppercase text-xs tracking-[0.4em]">Start Playing Now</button>
         </div>
     </section>
 
-    <section class="py-40 bg-xDark/30">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-white font-black text-6xl uppercase mb-6" data-aos="fade-up">Server Features</h2>
-            <p class="text-xYellow font-black uppercase tracking-[0.5em] text-sm mb-24" data-aos="fade-up" data-aos-delay="100">Experience the Royal Difference</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div class="feature-card p-12 rounded-xl text-left" data-aos="fade-up">
-                    <i class="fas fa-server text-xYellow text-4xl mb-8"></i>
-                    <h5 class="text-white font-black uppercase tracking-tighter mb-4 text-2xl">RAGEMP Engine</h5>
-                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Advanced multiplayer modification providing ultra-stable performance and enhanced gameplay mechanisms.</p>
-                    <div class="flex gap-2"><span class="tag tag-yellow">Stable</span><span class="tag tag-blue">Fast</span><span class="tag tag-red">Secure</span></div>
-                </div>
-                <div class="feature-card p-12 rounded-xl text-left" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-door-open text-xYellow text-4xl mb-8"></i>
-                    <h5 class="text-white font-black uppercase tracking-tighter mb-4 text-2xl">No Whitelist</h5>
-                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Jump straight into action! No lengthy application process or waiting periods. Create your story immediately.</p>
-                    <div class="flex gap-2"><span class="tag tag-green text-black">Instant Access</span><span class="tag tag-yellow">No Wait</span></div>
-                </div>
-                <div class="feature-card p-12 rounded-xl text-left" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-balance-scale text-xYellow text-4xl mb-8"></i>
-                    <h5 class="text-white font-black uppercase tracking-tighter mb-4 text-2xl">Free Legal Orgs</h5>
-                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Join Police, Medical Services, or DOJ without any cost. Build your career in our professional law enforcement.</p>
-                    <div class="flex gap-2"><span class="tag tag-blue">Police</span><span class="tag tag-red">EMS</span><span class="tag tag-yellow">DOJ</span></div>
-                </div>
-                <div class="feature-card p-12 rounded-xl text-left" data-aos="fade-up">
-                    <i class="fas fa-mask text-xYellow text-4xl mb-8"></i>
-                    <h5 class="text-white font-black uppercase tracking-tighter mb-4 text-2xl">Gangs & Families</h5>
-                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Create or join powerful criminal organizations with advanced territory systems and hierarchical rewards.</p>
-                    <div class="flex gap-2"><span class="tag tag-red">Mafia</span><span class="tag tag-purple">Cartels</span></div>
-                </div>
-                <div class="feature-card p-12 rounded-xl text-left" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-calendar-check text-xYellow text-4xl mb-8"></i>
-                    <h5 class="text-white font-black uppercase tracking-tighter mb-4 text-2xl">Exclusive Events</h5>
-                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Participate in unique server-wide events, special missions, and holiday competitions with rare rewards.</p>
-                    <div class="flex gap-2"><span class="tag tag-yellow">Prizes</span><span class="tag tag-blue">Special</span></div>
-                </div>
-                <div class="feature-card p-12 rounded-xl text-left" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-car-side text-xYellow text-4xl mb-8"></i>
-                    <h5 class="text-white font-black uppercase tracking-tighter mb-4 text-2xl">300+ Vehicles</h5>
-                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Drive an extensive collection of over 300 vehicles including supercars, motorcycles, and trucks.</p>
-                    <div class="flex gap-2"><span class="tag tag-blue">Imports</span><span class="tag tag-yellow">Custom</span></div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section id="donate" class="py-40 bg-xDark/30 text-center"><h2 class="text-4xl font-black uppercase">Donate Store</h2></section>
+    <section id="forums" class="py-40 bg-black text-center"><h2 class="text-4xl font-black uppercase">Community Forums</h2></section>
+    <section id="support" class="py-40 bg-xDark/30 text-center"><h2 class="text-4xl font-black uppercase">Technical Support</h2></section>
 
-    <section class="py-40">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-white font-black text-6xl uppercase mb-24" data-aos="fade-up">Join Our Community</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div class="bg-red-600/10 p-16 rounded-3xl border border-red-500/20 group hover:bg-red-600/20 transition-all duration-500" data-aos="zoom-in">
-                    <i class="fab fa-youtube text-red-600 text-7xl mb-8 group-hover:scale-110 transition"></i>
-                    <h4 class="text-white font-black text-4xl mb-2 tracking-tighter">14</h4>
-                    <p class="text-gray-400 font-bold uppercase tracking-widest text-[10px]">Subscribers</p>
-                    <button class="mt-10 bg-red-600 text-white font-black py-3 px-10 rounded-sm text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition">Subscribe</button>
-                </div>
-                <div class="bg-pink-600/10 p-16 rounded-3xl border border-pink-500/20 group hover:bg-pink-600/20 transition-all duration-500" data-aos="zoom-in" data-aos-delay="100">
-                    <i class="fab fa-instagram text-pink-500 text-7xl mb-8 group-hover:scale-110 transition"></i>
-                    <h4 class="text-white font-black text-4xl mb-2 tracking-tighter">18</h4>
-                    <p class="text-gray-400 font-bold uppercase tracking-widest text-[10px]">Followers</p>
-                    <button class="mt-10 bg-pink-600 text-white font-black py-3 px-10 rounded-sm text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition">Follow Us</button>
-                </div>
-                <div class="bg-indigo-600/10 p-16 rounded-3xl border border-indigo-500/20 group hover:bg-indigo-600/20 transition-all duration-500" data-aos="zoom-in" data-aos-delay="200">
-                    <i class="fab fa-discord text-indigo-500 text-7xl mb-8 group-hover:scale-110 transition"></i>
-                    <h4 class="text-white font-black text-4xl mb-2 tracking-tighter">1,351</h4>
-                    <p class="text-gray-400 font-bold uppercase tracking-widest text-[10px]">Members</p>
-                    <button class="mt-10 bg-indigo-600 text-white font-black py-3 px-10 rounded-sm text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition">Join Server</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-xDark border-t border-white/5 py-40">
-        <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-20">
-            <div class="col-span-1 md:col-span-2">
-                <div class="text-3xl font-black italic text-xYellow mb-8 tracking-tighter">ROYAL ROLEPLAY</div>
-                <p class="text-gray-500 text-xs uppercase leading-loose max-w-sm">The most immersive GTA 5 RP server powered by RAGEMP. join thousands of players and begin your journey today.</p>
-                <div class="flex space-x-6 mt-10">
-                    <a href="#" class="text-gray-500 hover:text-white text-xl transition"><i class="fab fa-discord"></i></a>
-                    <a href="#" class="text-gray-500 hover:text-white text-xl transition"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="text-gray-500 hover:text-white text-xl transition"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div>
-                <h6 class="text-white font-black uppercase mb-10 tracking-[0.2em] text-xs">Navigation</h6>
-                <ul class="space-y-4 text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                    <li><a href="#" class="hover:text-xYellow transition">Home</a></li>
-                    <li><a href="#" class="hover:text-xYellow transition">Donate Store</a></li>
-                    <li><a href="#" class="hover:text-xYellow transition">Our Wiki</a></li>
-                    <li><a href="#" class="hover:text-xYellow transition">Contact Support</a></li>
-                </ul>
-            </div>
-            <div>
-                <h6 class="text-white font-black uppercase mb-10 tracking-[0.2em] text-xs">Legal Info</h6>
-                <ul class="space-y-4 text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                    <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
-                    <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
-                    <li><a href="#" class="hover:text-white transition">Refund Policy</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-8 mt-32 pt-10 border-t border-white/5 text-center">
-            <p class="text-gray-600 text-[9px] font-bold uppercase tracking-[0.8em]">© 2026 Royal Roleplay Project • Engineered for Immersion</p>
-        </div>
+    <footer class="bg-xDark border-t border-white/5 py-24 text-center">
+        <div class="text-3xl font-black italic text-xYellow mb-8">ROYAL ROLEPLAY</div>
+        <p class="text-gray-600 text-[9px] font-bold uppercase tracking-[0.8em]">© 2026 Royal Roleplay Project • Engineered for Immersion</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Start Animations
-        AOS.init({ duration: 1000, once: true, offset: 50 });
+        AOS.init({ duration: 1000, once: true });
 
-        // Hide Loader
+        // --- JavaScript: السحر اللي بيحرك الخط الأصفر ---
+        const sections = document.querySelectorAll("header, section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                // إذا كان المستخدم في منتصف السيكشن تقريباً
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(current)) {
+                    link.classList.add("active");
+                }
+            });
+        });
+
+        // Loader
         window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
             setTimeout(() => {
-                loader.style.opacity = '0';
-                setTimeout(() => { loader.style.display = 'none'; }, 800);
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 800);
             }, 1000);
         });
 
-        // Background Particles Generator
+        // Particles
         const container = document.getElementById('particles');
-        const colors = ['#fbb416', '#ffffff', '#2563eb'];
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 40; i++) {
             const cube = document.createElement('div');
             cube.className = 'cube';
             const size = Math.random() * 12 + 4 + 'px';
-            cube.style.width = size;
-            cube.style.height = size;
+            cube.style.width = size; cube.style.height = size;
             cube.style.left = Math.random() * 100 + 'vw';
             cube.style.animationDelay = Math.random() * 15 + 's';
             cube.style.animationDuration = Math.random() * 10 + 12 + 's';
-            cube.style.background = colors[Math.floor(Math.random() * colors.length)] + '15';
+            cube.style.background = 'rgba(251, 180, 22, 0.1)';
             container.appendChild(cube);
         }
     </script>
