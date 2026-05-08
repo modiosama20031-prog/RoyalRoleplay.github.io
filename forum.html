@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forums | Royal RP</title>
+    <title>Forums | Royal RolePlay</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -26,7 +26,7 @@
     </script>
 
     <style>
-        body { background-color: #120d0b; }
+        body { background-color: #120d0b; font-family: 'Inter', sans-serif; }
         .forum-box { background-color: #1a1412; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 4px; }
         .forum-row { border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: 0.2s; }
         .forum-row:last-child { border-bottom: none; }
@@ -39,32 +39,27 @@
 
         .sidebar-widget { background-color: #1a1412; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 4px; margin-bottom: 15px; }
         .widget-header { background: rgba(255,255,255,0.02); padding: 12px 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); font-weight: 700; color: #fff; font-size: 14px; }
-        
-        .dropdown-menu { display: none; animation: fadeIn 0.2s ease-out; }
-        .dropdown-menu.show { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="text-gray-300 antialiased font-sans">
+<body class="text-gray-300 antialiased">
 
     <nav class="bg-xDark border-b border-white/5 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
             <div class="flex items-center space-x-8">
-                <a href="index.html"><img src="logo.png" class="h-9 w-auto"></a>
+                <a href="#"><img src="logo.png" alt="Royal RP Logo" class="h-9 w-auto"></a>
                 <div class="hidden md:flex space-x-6 text-[13px] font-medium uppercase tracking-wide">
-                    <a href="index.html" class="text-gray-400 hover:text-white">Home</a>
-                    <a href="forum.html" class="text-white border-b-2 border-primary py-5">Forums</a>
-                    <a href="#" class="text-gray-400 hover:text-white">What's new</a>
-                    <a href="#" class="text-gray-400 hover:text-white">Members</a>
-                    <a href="#" class="text-gray-400 hover:text-white">Grand Wiki</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Home</a>
+                    <a href="#" class="text-white border-b-2 border-primary py-5">Forums</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">What's new</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Members</a>
                 </div>
             </div>
             
-            <div id="auth-ui" class="flex items-center space-x-6 text-sm font-medium">
+            <div class="flex items-center space-x-6 text-sm font-medium">
                 <button class="text-gray-400 hover:text-white"><i class="fas fa-search"></i></button>
                 <div class="flex items-center space-x-4">
-                    <a href="login.html" class="text-gray-400 hover:text-white flex items-center"><i class="fas fa-sign-in-alt mr-2"></i>Log in</a>
-                    <a href="register.html" class="text-gray-400 hover:text-white flex items-center"><i class="fas fa-user-plus mr-2"></i>Register</a>
+                    <a href="#" class="text-gray-400 hover:text-white flex items-center transition"><i class="fas fa-sign-in-alt mr-2"></i>Log in</a>
+                    <a href="#" class="text-gray-400 hover:text-white flex items-center transition"><i class="fas fa-user-plus mr-2"></i>Register</a>
                 </div>
             </div>
         </div>
@@ -77,14 +72,14 @@
         </div>
     </div>
 
-    <div id="welcome-banner" class="hero-banner py-16 border-b border-white/5">
+    <div class="hero-banner py-16 border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4">
-            <h1 class="text-5xl font-bold text-white mb-3">Welcome!</h1>
+            <h1 class="text-5xl font-bold text-white mb-3">Welcome to Royal Roleplay!</h1>
             <p class="text-gray-300 max-w-xl mb-8 text-sm leading-relaxed font-medium">
-                By registering with us, you'll be able to discuss, share and private message with other members of our community.
+                Experience the most immersive GTA V RP server. Register now to join our community, discuss, share, and connect with other members.
             </p>
-            <a href="register.html" class="bg-xYellow hover:bg-yellow-500 text-black font-black py-2.5 px-8 rounded shadow-lg transition uppercase italic text-sm">
-                <i class="fas fa-edit mr-2"></i> Signup Now!
+            <a href="#" class="bg-primary hover:bg-orange-600 text-white font-bold py-2.5 px-8 rounded shadow-lg transition uppercase text-sm">
+                <i class="fas fa-user-plus mr-2"></i> Register Now
             </a>
         </div>
     </div>
@@ -92,37 +87,28 @@
     <div class="max-w-7xl mx-auto px-4 py-6">
         
         <div class="forum-box p-3 mb-6 flex justify-between items-center text-[13px] font-medium">
-            <span class="text-gray-400 ml-2">New posts</span>
-            <div class="flex items-center space-x-3">
-                <button id="open-modal-btn" class="hidden bg-xYellow hover:bg-yellow-500 text-black font-bold py-1.5 px-4 rounded text-[11px] uppercase italic transition">
-                    <i class="fas fa-plus mr-1"></i> New Posts
-                </button>
-                <div class="w-10 h-5 bg-primary/20 rounded-full relative flex items-center px-1 cursor-pointer">
-                    <div class="w-3.5 h-3.5 bg-primary rounded-full"></div>
-                </div>
-            </div>
+            <span class="text-gray-400 ml-2">Forums</span>
+            <button class="bg-primary/20 hover:bg-primary/40 text-primary font-bold py-1.5 px-4 rounded text-[11px] uppercase transition border border-primary/30">
+                <i class="fas fa-edit mr-1"></i> Post Thread
+            </button>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
             
             <div class="lg:col-span-3 space-y-8">
                 
-                <div class="forum-box p-4 flex items-center gap-4 hover:bg-white/5 transition cursor-pointer">
-                    <i class="fas fa-link text-gray-500 text-lg"></i>
-                    <a href="#" class="text-white font-bold text-[14px]">Server and Forum Rules</a>
-                </div>
-
                 <div>
                     <div class="flex justify-between items-center border-b border-primary pb-2 mb-3 px-1">
                         <h2 class="text-lg font-bold text-white tracking-tight">Royal RolePlay</h2>
-                        <i class="fas fa-chevron-up text-gray-600 text-[10px]"></i>
+                        <i class="fas fa-chevron-up text-gray-600 text-[10px] cursor-pointer hover:text-white transition"></i>
                     </div>
 
                     <div class="forum-box overflow-hidden">
                         <div class="forum-row flex items-center p-4">
-                            <i class="far fa-comment-alt text-2xl text-gray-600 w-14 text-center"></i>
+                            <i class="far fa-comments text-2xl text-gray-600 w-14 text-center"></i>
                             <div class="flex-grow">
-                                <a href="#" class="text-white font-bold text-[15px] hover:text-primary transition">Frequently asked questions (FAQ)</a>
+                                <a href="#" class="text-white font-bold text-[15px] hover:text-primary transition">Frequently Asked Questions (FAQ)</a>
+                                <p class="text-xs text-gray-500 mt-1">General questions and answers about the server.</p>
                             </div>
                             <div class="hidden sm:flex space-x-10 px-6 text-center border-l border-white/5">
                                 <div><div class="text-white font-bold text-sm">0</div><div class="text-[9px] text-gray-500 uppercase font-bold">Threads</div></div>
@@ -132,9 +118,23 @@
                         </div>
 
                         <div class="forum-row flex items-center p-4">
-                            <i class="far fa-comment-alt text-2xl text-gray-600 w-14 text-center"></i>
+                            <i class="fas fa-hand-holding-usd text-2xl text-gray-600 w-14 text-center"></i>
                             <div class="flex-grow">
                                 <a href="#" class="text-white font-bold text-[15px] hover:text-primary transition">Donate services</a>
+                                <p class="text-xs text-gray-500 mt-1">Information regarding server donations and perks.</p>
+                            </div>
+                            <div class="hidden sm:flex space-x-10 px-6 text-center border-l border-white/5">
+                                <div><div class="text-white font-bold text-sm">0</div><div class="text-[9px] text-gray-500 uppercase font-bold">Threads</div></div>
+                                <div><div class="text-white font-bold text-sm">0</div><div class="text-[9px] text-gray-500 uppercase font-bold">Messages</div></div>
+                            </div>
+                            <div class="w-48 pl-6 hidden lg:block text-[11px] text-gray-500 italic">No posts yet.</div>
+                        </div>
+
+                        <div class="forum-row flex items-center p-4">
+                            <i class="fas fa-cogs text-2xl text-gray-600 w-14 text-center"></i>
+                            <div class="flex-grow">
+                                <a href="#" class="text-white font-bold text-[15px] hover:text-primary transition">Technical section</a>
+                                <p class="text-xs text-gray-500 mt-1">Report bugs or technical issues here.</p>
                             </div>
                             <div class="hidden sm:flex space-x-10 px-6 text-center border-l border-white/5">
                                 <div><div class="text-white font-bold text-sm">0</div><div class="text-[9px] text-gray-500 uppercase font-bold">Threads</div></div>
@@ -144,26 +144,88 @@
                         </div>
                     </div>
                 </div>
+
+                <div>
+                    <div class="flex justify-between items-center border-b border-primary pb-2 mb-3 px-1">
+                        <h2 class="text-lg font-bold text-white tracking-tight">Game Section</h2>
+                        <i class="fas fa-chevron-up text-gray-600 text-[10px] cursor-pointer hover:text-white transition"></i>
+                    </div>
+
+                    <div class="forum-box overflow-hidden">
+                        <div class="forum-row flex items-center p-4">
+                            <i class="fas fa-server text-2xl text-gray-600 w-14 text-center"></i>
+                            <div class="flex-grow">
+                                <a href="#" class="text-white font-bold text-[15px] hover:text-primary transition">Server #1 | EN</a>
+                                <p class="text-xs text-gray-500 mt-1">Discussions related to the English Server.</p>
+                            </div>
+                            <div class="hidden sm:flex space-x-10 px-6 text-center border-l border-white/5">
+                                <div><div class="text-white font-bold text-sm">0</div><div class="text-[9px] text-gray-500 uppercase font-bold">Threads</div></div>
+                                <div><div class="text-white font-bold text-sm">0</div><div class="text-[9px] text-gray-500 uppercase font-bold">Messages</div></div>
+                            </div>
+                            <div class="w-48 pl-6 hidden lg:block text-[11px] text-gray-500 italic">No posts yet.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center border-b border-primary pb-2 mb-3 px-1">
+                        <h2 class="text-lg font-bold text-white tracking-tight">User Communication</h2>
+                        <i class="fas fa-chevron-up text-gray-600 text-[10px] cursor-pointer hover:text-white transition"></i>
+                    </div>
+
+                    <div class="forum-box overflow-hidden">
+                        <div class="forum-row flex items-center p-4">
+                            <i class="fas fa-users text-2xl text-gray-600 w-14 text-center"></i>
+                            <div class="flex-grow">
+                                <a href="#" class="text-white font-bold text-[15px] hover:text-primary transition">Communication</a>
+                                <p class="text-xs text-gray-500 mt-1">General talk and off-topic discussions.</p>
+                            </div>
+                            <div class="hidden sm:flex space-x-10 px-6 text-center border-l border-white/5">
+                                <div><div class="text-white font-bold text-sm">0</div><div class="text-[9px] text-gray-500 uppercase font-bold">Threads</div></div>
+                                <div><div class="text-white font-bold text-sm">0</div><div class="text-[9px] text-gray-500 uppercase font-bold">Messages</div></div>
+                            </div>
+                            <div class="w-48 pl-6 hidden lg:block text-[11px] text-gray-500 italic">No posts yet.</div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="lg:col-span-1 space-y-4">
                 
-                <div class="sidebar-widget">
-                    <div class="widget-header uppercase tracking-wider">Latest posts</div>
-                    <div id="latest-posts-container" class="divide-y divide-white/5">
-                        <div class="p-6 text-center text-gray-600 text-xs italic">No latest posts yet.</div>
+                <div class="sidebar-widget p-4">
+                    <h3 class="text-white font-bold mb-4 border-b border-white/5 pb-2">Log in</h3>
+                    <form class="space-y-3">
+                        <input type="text" placeholder="Your name or email address" class="w-full bg-black/40 border border-white/10 rounded p-2 text-sm text-white focus:border-primary outline-none">
+                        <input type="password" placeholder="Password" class="w-full bg-black/40 border border-white/10 rounded p-2 text-sm text-white focus:border-primary outline-none">
+                        <div class="flex justify-between items-center text-xs text-gray-400">
+                            <label class="flex items-center space-x-2 cursor-pointer hover:text-white transition">
+                                <input type="checkbox" class="rounded bg-black/40 border-white/10 text-primary focus:ring-primary focus:ring-offset-0">
+                                <span>Stay logged in</span>
+                            </label>
+                            <a href="#" class="hover:text-primary transition">Forgot password?</a>
+                        </div>
+                        <button type="button" class="w-full bg-primary hover:bg-orange-600 text-white font-bold py-2 rounded text-sm transition">Log in</button>
+                    </form>
+                    <div class="mt-4 text-center border-t border-white/5 pt-4">
+                        <p class="text-xs text-gray-400 mb-2">Don't have an account?</p>
+                        <button class="w-full bg-transparent border border-primary text-primary hover:bg-primary hover:text-white font-bold py-2 rounded text-sm transition">Register now</button>
                     </div>
                 </div>
 
                 <div class="sidebar-widget">
                     <div class="widget-header uppercase tracking-wider">Members online</div>
                     <div class="p-4">
-                        <div class="text-xs text-gray-400 leading-relaxed">
-                            No members online.
+                        <div class="text-xs text-gray-400 leading-relaxed text-center italic">
+                            No members online right now.
                         </div>
-                        <div class="mt-4 pt-3 border-t border-white/5 text-[10px] text-gray-500">
-                            Total: 1 (members: 0, guests: 1)
-                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-widget">
+                    <div class="widget-header uppercase tracking-wider">Latest posts</div>
+                    <div class="p-4 text-center text-gray-600 text-xs italic">
+                        No latest posts yet.
                     </div>
                 </div>
 
@@ -172,8 +234,8 @@
                     <div class="p-4 space-y-2.5">
                         <div class="flex justify-between text-xs"><span class="text-gray-500">Threads:</span><span class="text-white font-bold">0</span></div>
                         <div class="flex justify-between text-xs"><span class="text-gray-500">Messages:</span><span class="text-white font-bold">0</span></div>
-                        <div class="flex justify-between text-xs"><span class="text-gray-500">Members:</span><span class="text-white font-bold">1</span></div>
-                        <div class="flex justify-between text-xs"><span class="text-gray-500 italic">Latest member:</span><span class="text-primary font-bold">Admin</span></div>
+                        <div class="flex justify-between text-xs"><span class="text-gray-500">Members:</span><span class="text-white font-bold">0</span></div>
+                        <div class="flex justify-between text-xs"><span class="text-gray-500 italic">Latest member:</span><span class="text-gray-400 font-bold">-</span></div>
                     </div>
                 </div>
 
@@ -181,8 +243,8 @@
                     <div class="widget-header uppercase tracking-wider">Online statistics</div>
                     <div class="p-4 space-y-2.5">
                         <div class="flex justify-between text-xs"><span class="text-gray-500">Members online:</span><span class="text-white font-bold">0</span></div>
-                        <div class="flex justify-between text-xs"><span class="text-gray-500">Guests online:</span><span class="text-white font-bold">1</span></div>
-                        <div class="flex justify-between text-xs"><span class="text-gray-500">Total visitors:</span><span class="text-white font-bold">1</span></div>
+                        <div class="flex justify-between text-xs"><span class="text-gray-500">Guests online:</span><span class="text-white font-bold">0</span></div>
+                        <div class="flex justify-between text-xs"><span class="text-gray-500">Total visitors:</span><span class="text-white font-bold">0</span></div>
                     </div>
                 </div>
 
@@ -190,96 +252,5 @@
         </div>
     </div>
 
-    <div id="post-modal" class="fixed inset-0 z-[100] modal-bg hidden flex items-center justify-center p-4">
-        <div class="forum-box w-full max-w-xl p-8 relative">
-            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-white"><i class="fas fa-times text-xl"></i></button>
-            <h3 class="font-bold text-2xl text-white mb-6">Create New Thread</h3>
-            <form id="create-post-form" class="space-y-4">
-                <input type="text" id="post-title" required placeholder="Thread Title" class="w-full bg-black/40 border border-white/10 rounded p-3 text-white focus:border-primary outline-none text-sm">
-                <textarea id="post-content" required rows="6" placeholder="Message content..." class="w-full bg-black/40 border border-white/10 rounded p-3 text-white focus:border-primary outline-none text-sm resize-none"></textarea>
-                <div class="flex justify-end pt-2">
-                    <button type="submit" class="bg-xYellow hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded text-xs transition uppercase italic">Post Thread</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, serverTimestamp, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDZW7T9mxKujkcXoJ81RSp9980xeieGX6k",
-            authDomain: "royelrolplay.firebaseapp.com",
-            projectId: "royelrolplay",
-            storageBucket: "royelrolplay.firebasestorage.app",
-            messagingSenderId: "906026544780",
-            appId: "1:906026544780:web:00eba4b774eb61651ad5a9"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        // UI Handlers
-        const authUi = document.getElementById('auth-ui');
-        const welcomeBanner = document.getElementById('welcome-banner');
-        const openModalBtn = document.getElementById('open-modal-btn');
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const name = user.email.split('@')[0];
-                authUi.innerHTML = `
-                    <div class="flex items-center space-x-4">
-                        <span class="text-white font-bold"><i class="fas fa-user-circle mr-2 text-primary"></i>${name}</span>
-                        <button id="logout-btn" class="text-red-400 text-[10px] font-bold uppercase hover:underline">Log out</button>
-                    </div>`;
-                welcomeBanner.classList.add('hidden');
-                openModalBtn.classList.remove('hidden');
-                document.getElementById('logout-btn').addEventListener('click', () => signOut(auth).then(() => window.location.reload()));
-            }
-        });
-
-        // Modal Controls
-        document.getElementById('open-modal-btn').addEventListener('click', () => document.getElementById('post-modal').classList.remove('hidden'));
-        document.getElementById('close-modal-btn').addEventListener('click', () => document.getElementById('post-modal').classList.add('hidden'));
-
-        // Post Handling
-        document.getElementById('create-post-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const user = auth.currentUser;
-            if (!user) return;
-            await addDoc(collection(db, "threads"), {
-                title: document.getElementById('post-title').value,
-                content: document.getElementById('post-content').value,
-                author: user.email.split('@')[0],
-                createdAt: serverTimestamp()
-            });
-            window.location.reload();
-        });
-
-        // Load Sidebar Posts (Dynamic)
-        async function loadSidebar() {
-            const container = document.getElementById('latest-posts-container');
-            const q = query(collection(db, "threads"), orderBy("createdAt", "desc"), limit(5));
-            const snap = await getDocs(q);
-            if (!snap.empty) {
-                container.innerHTML = '';
-                snap.forEach(doc => {
-                    const data = doc.data();
-                    container.innerHTML += `
-                        <div class="p-3 flex items-start gap-3 hover:bg-white/5 transition cursor-pointer">
-                            <div class="w-8 h-8 rounded bg-primary/20 flex items-center justify-center text-primary font-bold text-xs flex-shrink-0">${data.author.charAt(0).toUpperCase()}</div>
-                            <div class="overflow-hidden">
-                                <h4 class="text-[12px] text-white font-bold truncate">${data.title}</h4>
-                                <p class="text-[10px] text-gray-500 mt-1">By ${data.author} • Just now</p>
-                            </div>
-                        </div>`;
-                });
-            }
-        }
-        loadSidebar();
-    </script>
 </body>
 </html>
