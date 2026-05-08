@@ -18,14 +18,16 @@
 <body class="auth-bg min-h-screen flex items-center justify-center p-4 text-gray-300">
     <div class="glass-panel w-full max-w-md rounded-[2rem] p-10 relative overflow-hidden">
         <div class="text-center mb-8">
-            <img src="logo.png" class="h-16 mx-auto mb-6">
+            <img src="logo.png" alt="Royal RP Logo" class="h-16 mx-auto mb-6">
             <h2 class="text-3xl font-bold text-white">Welcome Back</h2>
         </div>
-        <form id="login-form" class="space-y-5">
+        
+        <form id="login-form" onsubmit="event.preventDefault();" class="space-y-5">
             <input type="email" id="login-email" placeholder="Email" required class="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none">
             <input type="password" id="login-password" placeholder="Password" required class="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none">
             <button type="submit" class="w-full bg-primary hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl transition shadow-lg">Sign In</button>
         </form>
+        
         <p class="mt-8 text-center text-sm">New here? <a href="register.html" class="text-primary font-semibold">Create Account</a></p>
     </div>
 
@@ -54,11 +56,11 @@
 
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    alert("تم تسجيل الدخول بنجاح! نورت السيرفر.");
-                    window.location.href = "forum.html"; // هيدخله على المنتدى بعد التسجيل
+                    alert("Signed in successfully! Welcome back.");
+                    window.location.href = "forum.html"; 
                 })
                 .catch((error) => {
-                    alert("الإيميل أو الباسورد غلط، جرب تاني.");
+                    alert("Invalid email or password. Please try again.");
                 });
         });
     </script>
