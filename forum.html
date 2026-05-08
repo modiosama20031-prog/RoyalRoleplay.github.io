@@ -39,7 +39,6 @@
             background: rgba(255, 255, 255, 0.02);
             transition: all 0.2s ease;
         }
-        /* تصميم قائمة الحساب المنسدلة */
         .dropdown-menu {
             display: none;
             animation: fadeIn 0.2s ease-out;
@@ -50,6 +49,14 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        .modal-bg {
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+        }
+        select option {
+            background-color: #1c1715;
+            color: white;
         }
     </style>
 </head>
@@ -84,16 +91,35 @@
                             <i class="fas fa-chevron-down text-xs text-gray-400 ml-1"></i>
                         </button>
                         
-                        <div id="profile-dropdown" class="dropdown-menu absolute right-0 top-12 w-56 bg-warmLighter border border-white/10 rounded-xl shadow-2xl py-2 z-50">
-                            <div class="px-4 py-3 border-b border-white/5 mb-2">
-                                <p class="text-xs text-gray-400">Signed in as</p>
-                                <p id="dropdown-email" class="text-sm font-bold text-white truncate">email@example.com</p>
+                        <div id="profile-dropdown" class="dropdown-menu absolute right-0 top-14 w-[340px] bg-[#1a1412] border border-white/5 rounded shadow-2xl z-50 p-4">
+                            <div class="flex items-start gap-4 mb-4">
+                                <div class="flex-shrink-0 w-20 h-20 bg-red-800/80 rounded flex items-center justify-center">
+                                    <span id="dropdown-avatar-letter" class="text-4xl text-white/90 font-light">A</span>
+                                </div>
+                                <div class="flex-grow">
+                                    <h3 id="dropdown-username" class="text-white font-bold text-base mb-0.5">Player</h3>
+                                    <p class="text-yellow-400 text-xs font-semibold mb-2">New member</p>
+                                    <div class="space-y-1">
+                                        <div class="flex justify-between items-center text-yellow-400 text-xs"><span>Messages:</span><span class="font-bold">0</span></div>
+                                        <div class="flex justify-between items-center text-yellow-400 text-xs"><span>Reaction score:</span><span class="font-bold">0</span></div>
+                                        <div class="flex justify-between items-center text-yellow-400 text-xs"><span>Trophy points:</span><span class="font-bold">0</span></div>
+                                    </div>
+                                </div>
                             </div>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-primary transition"><i class="fas fa-id-card w-5"></i> Account details</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-primary transition"><i class="fas fa-lock w-5"></i> Password and security</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-primary transition"><i class="fas fa-cog w-5"></i> Preferences</a>
-                            <div class="border-t border-white/5 my-2"></div>
-                            <button id="logout-btn" class="w-full text-left block px-4 py-2 text-sm text-red-400 hover:bg-white/5 transition"><i class="fas fa-sign-out-alt w-5"></i> Log out</button>
+                            <div class="grid grid-cols-2 gap-x-4 gap-y-3 pt-4 border-t border-white/5">
+                                <div class="space-y-3">
+                                    <a href="#" class="block text-xs font-medium text-gray-300 hover:text-white transition">News feed</a>
+                                    <a href="#" class="block text-xs font-medium text-gray-300 hover:text-white transition">Your content</a>
+                                    <a href="#" class="block text-xs font-medium text-gray-300 hover:text-white transition pt-2">Account details</a>
+                                    <a href="#" class="block text-xs font-medium text-gray-300 hover:text-white transition">Password and security</a>
+                                    <button id="logout-btn" class="block w-full text-left text-xs font-bold text-gray-300 hover:text-red-400 transition pt-2">Log out</button>
+                                </div>
+                                <div class="space-y-3">
+                                    <a href="#" class="block text-xs font-medium text-gray-300 hover:text-white transition">Reactions received</a>
+                                    <a href="#" class="block text-xs font-medium text-gray-300 hover:text-white transition pt-8">Preferences</a>
+                                    <a href="#" class="block text-xs font-medium text-gray-300 hover:text-white transition">Following</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -103,11 +129,9 @@
 
     <div class="pt-32 pb-8 px-4 border-b border-white/5 bg-gradient-to-b from-primary/10 to-transparent">
         <div class="max-w-7xl mx-auto flex justify-between items-end">
-            <div>
-                <h1 class="font-heading font-extrabold text-3xl md:text-4xl text-white tracking-tight">Royal RolePlay Forums</h1>
-            </div>
-            <button id="new-post-btn" class="hidden bg-primary hover:bg-orange-600 text-white font-bold py-2.5 px-5 rounded-lg transition shadow-lg items-center text-sm">
-                <i class="fas fa-pen mr-2"></i> NEW POSTS
+            <h1 class="font-heading font-extrabold text-3xl md:text-4xl text-white tracking-tight">Royal RolePlay Forums</h1>
+            <button id="open-modal-btn" class="hidden bg-primary hover:bg-orange-600 text-white font-bold py-2.5 px-5 rounded-lg transition shadow-lg items-center text-sm">
+                <i class="fas fa-pen mr-2"></i> NEW POST
             </button>
         </div>
     </div>
@@ -116,131 +140,64 @@
         
         <div>
             <div class="bg-gradient-to-r from-primary/80 to-primary/40 px-4 py-3 rounded-t-xl border border-primary/50">
-                <h2 class="font-heading font-bold text-lg text-white"><i class="fas fa-server mr-2"></i> Server #1 | EN</h2>
+                <h2 class="font-heading font-bold text-lg text-white uppercase tracking-wider"><i class="fas fa-server mr-2"></i> Server #1 | EN</h2>
             </div>
-            
             <div class="glass-panel border-t-0 rounded-b-xl overflow-hidden divide-y divide-white/5">
-                
                 <div class="forum-row flex items-center p-4">
-                    <div class="flex-shrink-0 w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-gray-400">
-                        <i class="fas fa-book text-xl"></i>
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <a href="#" class="text-base font-bold text-white hover:text-primary transition">Server Rules</a>
-                        <p class="text-xs text-gray-500 mt-0.5">Rules of State, General Rules, and Ghetto Rules.</p>
-                    </div>
-                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
-                        <span class="text-sm font-bold text-white">7</span>
-                        <span class="text-[10px] text-gray-500 uppercase">Threads</span>
-                    </div>
-                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
-                        <span class="text-sm font-bold text-white">7</span>
-                        <span class="text-[10px] text-gray-500 uppercase">Messages</span>
-                    </div>
-                    <div class="hidden lg:block w-48 text-right pl-4 border-l border-white/5">
-                        <p class="text-xs text-primary font-bold">Important: Rules of State</p>
-                        <p class="text-xs text-gray-500 mt-1">Apr 8, 2026 • Admin</p>
-                    </div>
+                    <div class="flex-shrink-0 w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-gray-400"><i class="fas fa-book text-xl"></i></div>
+                    <div class="ml-4 flex-grow"><a href="#" class="text-base font-bold text-white hover:text-primary transition">Server Rules</a><p class="text-xs text-gray-500">General and Ghetto Rules.</p></div>
+                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center"><span class="text-sm font-bold text-white">7</span><span class="text-[10px] text-gray-500 uppercase">Threads</span></div>
                 </div>
-
                 <div class="forum-row flex items-center p-4">
-                    <div class="flex-shrink-0 w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-gray-400">
-                        <i class="fas fa-gavel text-xl"></i>
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <a href="#" class="text-base font-bold text-white hover:text-primary transition">Complaints</a>
-                        <p class="text-xs text-gray-500 mt-0.5">Report players who break the server rules here.</p>
-                    </div>
-                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
-                        <span class="text-sm font-bold text-white">56</span>
-                        <span class="text-[10px] text-gray-500 uppercase">Threads</span>
-                    </div>
-                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
-                        <span class="text-sm font-bold text-white">198</span>
-                        <span class="text-[10px] text-gray-500 uppercase">Messages</span>
-                    </div>
-                    <div class="hidden lg:block w-48 text-right pl-4 border-l border-white/5">
-                        <p class="text-xs text-primary font-bold truncate">Player reported for VDM</p>
-                        <p class="text-xs text-gray-500 mt-1">Yesterday • Mod_Ahmed</p>
-                    </div>
+                    <div class="flex-shrink-0 w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center text-primary"><i class="fas fa-file-signature text-xl"></i></div>
+                    <div class="ml-4 flex-grow"><a href="#" class="text-base font-bold text-white hover:text-primary transition">Applications</a><p class="text-xs text-gray-500">Apply for Admin or Media status.</p></div>
+                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center"><span class="text-sm font-bold text-white">477</span><span class="text-[10px] text-gray-500 uppercase">Threads</span></div>
                 </div>
-
-                <div class="forum-row flex items-center p-4">
-                    <div class="flex-shrink-0 w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center text-primary">
-                        <i class="fas fa-file-signature text-xl"></i>
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <a href="#" class="text-base font-bold text-white hover:text-primary transition">Applications <span class="bg-red-500 text-white text-[9px] px-1.5 py-0.5 rounded ml-1 uppercase">New</span></a>
-                        <p class="text-xs text-gray-500 mt-0.5">Apply for Admin, Helper, or Media status.</p>
-                    </div>
-                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
-                        <span class="text-sm font-bold text-white">477</span>
-                        <span class="text-[10px] text-gray-500 uppercase">Threads</span>
-                    </div>
-                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
-                        <span class="text-sm font-bold text-white">1.8K</span>
-                        <span class="text-[10px] text-gray-500 uppercase">Messages</span>
-                    </div>
-                    <div class="hidden lg:block w-48 text-right pl-4 border-l border-white/5">
-                        <p class="text-xs text-primary font-bold truncate">Leader of LSPD Application</p>
-                        <p class="text-xs text-gray-500 mt-1">Today at 3:20 PM • SpikyMoha</p>
-                    </div>
-                </div>
-
             </div>
         </div>
 
         <div>
-            <div class="bg-gradient-to-r from-blue-600/80 to-blue-600/30 px-4 py-3 rounded-t-xl border border-blue-500/50">
-                <h2 class="font-heading font-bold text-lg text-white"><i class="fas fa-shield-alt mr-2"></i> Roleplay Organizations</h2>
+            <div class="bg-gradient-to-r from-gray-700/80 to-transparent px-4 py-3 rounded-t-xl border border-white/10">
+                <h2 class="font-heading font-bold text-lg text-white uppercase tracking-wider"><i class="fas fa-rss mr-2"></i> Live Feed</h2>
             </div>
-            
-            <div class="glass-panel border-t-0 rounded-b-xl overflow-hidden divide-y divide-white/5">
-                
-                <div class="forum-row flex items-center p-4">
-                    <div class="flex-shrink-0 w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center text-blue-400">
-                        <i class="fas fa-building-shield text-xl"></i>
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <a href="#" class="text-base font-bold text-white hover:text-blue-400 transition">State organizations</a>
-                        <p class="text-xs text-gray-500 mt-0.5">LSPD, EMS, FIB, National Guard.</p>
-                    </div>
-                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
-                        <span class="text-sm font-bold text-white">6</span>
-                        <span class="text-[10px] text-gray-500 uppercase">Threads</span>
-                    </div>
-                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
-                        <span class="text-sm font-bold text-white">42</span>
-                        <span class="text-[10px] text-gray-500 uppercase">Messages</span>
-                    </div>
-                </div>
-
-                <div class="forum-row flex items-center p-4">
-                    <div class="flex-shrink-0 w-10 h-10 bg-rose-500/10 rounded-full flex items-center justify-center text-rose-400">
-                        <i class="fas fa-mask text-xl"></i>
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <a href="#" class="text-base font-bold text-white hover:text-rose-400 transition">Ghetto (Gangs)</a>
-                        <p class="text-xs text-gray-500 mt-0.5">Ballas, Families, Vagos, Marabunta, Bloods.</p>
-                    </div>
-                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
-                        <span class="text-sm font-bold text-white">12</span>
-                        <span class="text-[10px] text-gray-500 uppercase">Threads</span>
-                    </div>
-                    <div class="hidden md:flex flex-col items-center justify-center w-24 text-center">
-                        <span class="text-sm font-bold text-white">89</span>
-                        <span class="text-[10px] text-gray-500 uppercase">Messages</span>
-                    </div>
-                </div>
-
+            <div id="posts-container" class="glass-panel border-t-0 rounded-b-xl overflow-hidden divide-y divide-white/5">
+                <div class="p-8 text-center text-gray-500 text-sm"><i class="fas fa-circle-notch fa-spin text-2xl mb-3 text-primary"></i><p>Syncing database...</p></div>
             </div>
         </div>
 
     </div>
 
+    <div id="post-modal" class="fixed inset-0 z-[100] modal-bg hidden flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-2xl rounded-3xl p-8 relative">
+            <button id="close-modal-btn" class="absolute top-6 right-6 text-gray-400 hover:text-white transition"><i class="fas fa-times text-xl"></i></button>
+            <h3 class="font-heading font-bold text-2xl text-white mb-6">Create New Thread</h3>
+            <form id="create-post-form" onsubmit="event.preventDefault();" class="space-y-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Category</label>
+                        <select id="post-category" required class="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none">
+                            <option value="" disabled selected>Select Category...</option>
+                            <option value="Announcements">Announcements</option>
+                            <option value="General Chat">General Chat</option>
+                            <option value="Government Factions">Government Factions</option>
+                            <option value="Illegal Factions">Illegal Factions</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Title</label>
+                        <input type="text" id="post-title" required class="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none">
+                    </div>
+                </div>
+                <textarea id="post-content" required rows="5" placeholder="Write your message..." class="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none resize-none"></textarea>
+                <div class="flex justify-end space-x-3"><button type="submit" class="bg-primary hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg">Post Thread</button></div>
+            </form>
+        </div>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDZW7T9mxKujkcXoJ81RSp9980xeieGX6k",
@@ -254,56 +211,72 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
-        // UI Elements
         const loggedOutView = document.getElementById('logged-out-view');
         const loggedInView = document.getElementById('logged-in-view');
-        const userDisplayName = document.getElementById('user-display-name');
-        const dropdownEmail = document.getElementById('dropdown-email');
         const profileBtn = document.getElementById('profile-btn');
         const profileDropdown = document.getElementById('profile-dropdown');
-        const logoutBtn = document.getElementById('logout-btn');
-        const newPostBtn = document.getElementById('new-post-btn');
+        const openModalBtn = document.getElementById('open-modal-btn');
+        const postsContainer = document.getElementById('posts-container');
 
-        // Dropdown Toggle Logic
-        profileBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // يمنع الصفحة تقفل القائمة فوراً
-            profileDropdown.classList.toggle('show');
-        });
+        // Dropdown Toggle
+        profileBtn.addEventListener('click', (e) => { e.stopPropagation(); profileDropdown.classList.toggle('show'); });
+        window.addEventListener('click', () => profileDropdown.classList.remove('show'));
 
-        // قفل القائمة لو داس في أي مكان فاضي في الصفحة
-        window.addEventListener('click', () => {
-            if (profileDropdown.classList.contains('show')) {
-                profileDropdown.classList.remove('show');
-            }
-        });
-
-        // Auth State Management
+        // Auth State
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // User is Logged In
+                const name = user.email.split('@')[0];
+                document.getElementById('user-display-name').textContent = name;
+                document.getElementById('dropdown-username').textContent = name;
+                document.getElementById('dropdown-avatar-letter').textContent = name.charAt(0).toUpperCase();
                 loggedOutView.classList.add('hidden');
-                loggedInView.classList.remove('hidden');
-                loggedInView.classList.add('flex');
-                newPostBtn.classList.remove('hidden');
-                newPostBtn.classList.add('flex');
-                
-                const username = user.email.split('@')[0];
-                userDisplayName.textContent = username;
-                dropdownEmail.textContent = user.email; // يحط الإيميل جوة القائمة المنسدلة
+                loggedInView.classList.remove('hidden'); loggedInView.classList.add('flex');
+                openModalBtn.classList.remove('hidden'); openModalBtn.classList.add('flex');
             } else {
-                // User is Logged Out
                 loggedInView.classList.add('hidden');
-                loggedInView.classList.remove('flex');
                 loggedOutView.classList.remove('hidden');
-                newPostBtn.classList.add('hidden');
+                openModalBtn.classList.add('hidden');
             }
         });
 
-        // Logout
-        logoutBtn.addEventListener('click', () => {
-            signOut(auth).then(() => window.location.reload());
+        document.getElementById('logout-btn').addEventListener('click', () => signOut(auth).then(() => window.location.reload()));
+        document.getElementById('open-modal-btn').addEventListener('click', () => document.getElementById('post-modal').classList.remove('hidden'));
+        document.getElementById('close-modal-btn').addEventListener('click', () => document.getElementById('post-modal').classList.add('hidden'));
+
+        document.getElementById('create-post-form').addEventListener('submit', async (e) => {
+            const user = auth.currentUser;
+            if (!user) return;
+            await addDoc(collection(db, "threads"), {
+                category: document.getElementById('post-category').value,
+                title: document.getElementById('post-title').value,
+                content: document.getElementById('post-content').value,
+                author: user.email.split('@')[0],
+                createdAt: serverTimestamp()
+            });
+            document.getElementById('post-modal').classList.add('hidden');
+            loadPosts();
         });
+
+        async function loadPosts() {
+            const q = query(collection(db, "threads"), orderBy("createdAt", "desc"));
+            const snap = await getDocs(q);
+            postsContainer.innerHTML = '';
+            snap.forEach(doc => {
+                const data = doc.data();
+                const categoryColor = data.category === 'Announcements' ? 'text-primary border-primary/30' : 'text-blue-400 border-blue-400/30';
+                postsContainer.innerHTML += `
+                    <div class="forum-row flex items-center p-4">
+                        <div class="flex-shrink-0 w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-gray-400"><i class="fas fa-comment"></i></div>
+                        <div class="ml-4 flex-grow">
+                            <div class="flex items-center gap-2"><h4 class="font-bold text-white">${data.title}</h4><span class="text-[9px] border px-1 rounded ${categoryColor}">${data.category}</span></div>
+                            <p class="text-xs text-gray-500">${data.author} • ${data.createdAt ? data.createdAt.toDate().toLocaleDateString() : 'Just now'}</p>
+                        </div>
+                    </div>`;
+            });
+        }
+        loadPosts();
     </script>
 </body>
 </html>
