@@ -38,6 +38,13 @@
         .forum-card:hover {
             background: rgba(249, 115, 22, 0.05);
             border-left: 4px solid #f97316;
+            transition: all 0.3s ease;
+        }
+        
+        /* Modal styling */
+        .modal-bg {
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
         }
     </style>
 </head>
@@ -60,7 +67,6 @@
                 </div>
 
                 <div class="flex items-center">
-                    
                     <div id="logged-out-view" class="flex items-center space-x-4">
                         <a href="login.html" class="text-sm text-gray-400 hover:text-white transition">Sign In</a>
                         <a href="register.html" class="bg-primary hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-full text-sm shadow-lg transition">Register</a>
@@ -75,38 +81,69 @@
                             <i class="fas fa-sign-out-alt mr-1"></i> Sign Out
                         </button>
                     </div>
-
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="pt-36 pb-12 px-4 max-w-7xl mx-auto">
-        <h1 class="font-heading font-extrabold text-4xl text-white tracking-tight uppercase"><span class="text-primary">Royal RP</span> Forums</h1>
-        <p class="mt-2 text-gray-400">Welcome to our community. Share your thoughts and stories.</p>
+    <div class="pt-36 px-4 max-w-7xl mx-auto flex justify-between items-end">
+        <div>
+            <h1 class="font-heading font-extrabold text-4xl text-white tracking-tight uppercase"><span class="text-primary">Royal RP</span> Forums</h1>
+            <p class="mt-2 text-gray-400">Welcome to our community. Share your thoughts and stories.</p>
+        </div>
         
-        <div class="mt-12 space-y-6">
-            <div class="glass-panel rounded-3xl p-6 forum-card flex items-center">
-                <div class="w-12 h-12 bg-primary/10 text-primary rounded-2xl flex items-center justify-center text-xl">
-                    <i class="fas fa-bullhorn"></i>
-                </div>
-                <div class="ml-6 flex-grow">
-                    <h4 class="text-lg font-bold text-white hover:text-primary cursor-pointer transition">Announcements</h4>
-                    <p class="text-sm text-gray-500">Official server updates and news.</p>
-                </div>
-                <div class="hidden md:flex space-x-8 text-center px-6 border-l border-white/5">
-                    <div><div class="text-white font-bold">124</div><div class="text-xs text-gray-500 uppercase tracking-widest">Threads</div></div>
-                    <div><div class="text-white font-bold">2.4k</div><div class="text-xs text-gray-500 uppercase tracking-widest">Posts</div></div>
+        <button id="open-modal-btn" class="hidden bg-white text-black font-bold py-3 px-6 rounded-xl hover:bg-gray-200 transition shadow-lg items-center">
+            <i class="fas fa-plus mr-2"></i> Create Thread
+        </button>
+    </div>
+
+    <div class="pb-12 px-4 max-w-7xl mx-auto">
+        
+        <div class="mt-12">
+            <div class="bg-gradient-to-r from-primary/20 to-transparent border-l-4 border-primary px-5 py-3 mb-4 rounded-r-lg">
+                <h2 class="font-heading font-bold text-xl text-white uppercase tracking-wider">Live Feed</h2>
+            </div>
+            
+            <div id="posts-container" class="glass-panel rounded-3xl overflow-hidden divide-y divide-white/5">
+                <div class="p-8 text-center text-gray-500 text-sm">
+                    <i class="fas fa-circle-notch fa-spin text-2xl mb-3 text-primary"></i>
+                    <p>Loading server data...</p>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div id="post-modal" class="fixed inset-0 z-[100] modal-bg hidden flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-2xl rounded-3xl p-8 relative">
+            <button id="close-modal-btn" class="absolute top-6 right-6 text-gray-400 hover:text-white transition">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <h3 class="font-heading font-bold text-2xl text-white mb-6">Create New Thread</h3>
+            
+            <form id="create-post-form" class="space-y-5">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Thread Title</label>
+                    <input type="text" id="post-title" required class="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Message</label>
+                    <textarea id="post-content" required rows="5" class="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none resize-none"></textarea>
+                </div>
+                <div class="flex justify-end space-x-3 pt-2">
+                    <button type="button" id="cancel-modal-btn" class="px-6 py-3 rounded-xl text-gray-300 font-medium hover:bg-white/5 transition">Cancel</button>
+                    <button type="submit" class="bg-primary hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg">Post Thread</button>
+                </div>
+            </form>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        // Import Firestore Database functions
+        import { getFirestore, collection, addDoc, getDocs, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        // Your Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyDZW7T9mxKujkcXoJ81RSp9980xeieGX6k",
             authDomain: "royelrolplay.firebaseapp.com",
@@ -117,46 +154,147 @@
             measurementId: "G-CHTF9VX0GY"
         };
 
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
-        // Get UI Elements
+        // UI Elements
         const loggedOutView = document.getElementById('logged-out-view');
         const loggedInView = document.getElementById('logged-in-view');
         const userDisplayName = document.getElementById('user-display-name');
         const logoutBtn = document.getElementById('logout-btn');
+        
+        const openModalBtn = document.getElementById('open-modal-btn');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const cancelModalBtn = document.getElementById('cancel-modal-btn');
+        const postModal = document.getElementById('post-modal');
+        const createPostForm = document.getElementById('create-post-form');
+        const postsContainer = document.getElementById('posts-container');
 
-        // Listen for Login State Changes
+        let currentUser = null;
+
+        // 1. Auth State Management
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // User is Logged In
+                currentUser = user;
                 loggedOutView.classList.add('hidden');
-                
-                // Show logged in view
                 loggedInView.classList.remove('hidden');
                 loggedInView.classList.add('flex');
                 
-                // Extract the first part of the email to use as a display name
                 const username = user.email.split('@')[0];
                 userDisplayName.textContent = username;
+                
+                // Show Create Post button
+                openModalBtn.classList.remove('hidden');
+                openModalBtn.classList.add('flex');
             } else {
-                // User is Logged Out
+                currentUser = null;
                 loggedInView.classList.add('hidden');
                 loggedInView.classList.remove('flex');
-                
-                // Show logged out view
                 loggedOutView.classList.remove('hidden');
+                openModalBtn.classList.add('hidden');
             }
         });
 
-        // Handle Logout Button Click
         logoutBtn.addEventListener('click', () => {
-            signOut(auth).then(() => {
-                window.location.reload(); // Refresh page after logging out
-            }).catch((error) => {
-                console.error("Error logging out:", error);
-            });
+            signOut(auth).then(() => window.location.reload());
         });
+
+        // 2. Modal Logic
+        openModalBtn.addEventListener('click', () => {
+            postModal.classList.remove('hidden');
+        });
+
+        const closeModal = () => {
+            postModal.classList.add('hidden');
+            createPostForm.reset();
+        };
+
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelModalBtn.addEventListener('click', closeModal);
+
+        // 3. Save Post to Database
+        createPostForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!currentUser) return;
+
+            const title = document.getElementById('post-title').value;
+            const content = document.getElementById('post-content').value;
+            const authorName = currentUser.email.split('@')[0];
+
+            try {
+                // Add document to "threads" collection
+                await addDoc(collection(db, "threads"), {
+                    title: title,
+                    content: content,
+                    author: authorName,
+                    createdAt: serverTimestamp()
+                });
+                
+                closeModal();
+                loadPosts(); // Reload posts immediately
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("Failed to create post. Check console.");
+            }
+        });
+
+        // 4. Load Posts from Database
+        async function loadPosts() {
+            try {
+                // Query threads ordered by newest first
+                const q = query(collection(db, "threads"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+                
+                postsContainer.innerHTML = ''; // Clear loading spinner
+
+                if (querySnapshot.empty) {
+                    postsContainer.innerHTML = `
+                        <div class="p-8 text-center text-gray-500 text-sm">
+                            <p>No threads yet. Be the first to start a discussion!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const post = doc.data();
+                    
+                    // Format date (handle case where timestamp might be pending)
+                    const dateString = post.createdAt ? post.createdAt.toDate().toLocaleString() : 'Just now';
+
+                    const postHTML = `
+                        <div class="forum-card flex flex-col md:flex-row p-6">
+                            <div class="flex-shrink-0 w-12 h-12 bg-white/5 text-gray-400 rounded-2xl flex items-center justify-center text-xl mb-4 md:mb-0">
+                                <i class="fas fa-comment-dots"></i>
+                            </div>
+                            <div class="md:ml-6 flex-grow">
+                                <h4 class="text-lg font-bold text-white hover:text-primary transition cursor-pointer mb-1">${post.title}</h4>
+                                <p class="text-sm text-gray-400 line-clamp-2">${post.content}</p>
+                                <div class="flex items-center mt-3 space-x-3 text-xs text-gray-500">
+                                    <span class="text-primary font-medium"><i class="fas fa-user-edit mr-1"></i> ${post.author}</span>
+                                    <span>•</span>
+                                    <span><i class="far fa-clock mr-1"></i> ${dateString}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    postsContainer.innerHTML += postHTML;
+                });
+            } catch (error) {
+                console.error("Error loading posts: ", error);
+                postsContainer.innerHTML = `
+                    <div class="p-8 text-center text-red-400 text-sm">
+                        <p>Error loading server database. Did you enable Firestore yet?</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Run when page loads
+        loadPosts();
     </script>
 </body>
 </html>
