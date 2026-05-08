@@ -29,7 +29,7 @@
     </script>
 
     <style>
-        body { background-color: #0c0914; color: #d1d5db; overflow-x: hidden; } /* خلفية داكنة تميل للبنفسجي زي الفيديو */
+        body { background-color: #0c0914; color: #d1d5db; overflow-x: hidden; } 
         
         /* Hero Background */
         .hero-section { 
@@ -48,20 +48,20 @@
             to { transform: translateY(-10vh) rotate(360deg); opacity: 0; } 
         }
 
-        /* حل مشكلة الخط (Navigation Line Fix) */
+        /* Navigation Line Fix */
         .nav-link { position: relative; padding-bottom: 8px; color: #e5e7eb; transition: color 0.3s; }
         .nav-link:hover, .nav-link.active { color: #fbb416; }
         .nav-link::after {
             content: '';
             position: absolute;
-            left: 50%; /* بيبدأ من النص */
+            left: 50%; 
             bottom: 0;
-            transform: translateX(-50%); /* بيتمركز في النص */
+            transform: translateX(-50%); 
             width: 0;
             height: 2px;
             background-color: #fbb416;
             box-shadow: 0 0 10px rgba(251, 180, 22, 0.5);
-            transition: width 0.3s ease; /* بيكبر بنعومة */
+            transition: width 0.3s ease; 
         }
         .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
@@ -94,7 +94,7 @@
     <nav class="bg-[#0c0914]/90 backdrop-blur-xl border-b border-white/5 sticky top-0 z-50">
         <div class="max-w-[1600px] mx-auto px-6 flex items-center justify-between h-[80px]">
             <a href="#" class="flex-shrink-0 flex items-center gap-2">
-                <div class="w-10 h-10 bg-white rounded-md flex items-center justify-center font-black text-black text-xl">R</div>
+                <img src="logo.png" alt="Royal Roleplay" class="h-10 w-auto">
             </a>
 
             <div class="hidden lg:flex items-center space-x-10 text-[12px] font-black uppercase tracking-widest">
@@ -314,7 +314,7 @@
         <div class="max-w-[1500px] mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-16">
             <div>
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 bg-white rounded-md flex items-center justify-center font-black text-black text-2xl">R</div>
+                    <img src="logo.png" alt="Royal Roleplay" class="h-12 w-auto">
                     <div class="text-2xl font-black uppercase leading-tight text-white">ROYAL<br>ROLEPLAY</div>
                 </div>
                 <p class="text-gray-500 text-[11px] font-bold uppercase leading-relaxed max-w-xs">Experience the most immersive GTA 5 RP server powered by RageMP.</p>
