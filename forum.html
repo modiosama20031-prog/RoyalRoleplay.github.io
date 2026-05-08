@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forums | Royal RP - Premium GTA V Roleplay</title>
+    <title>Forums | Royal RP</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -17,10 +17,8 @@
                         heading: ['Outfit', 'sans-serif'],
                     },
                     colors: {
-                        // Sunset Orange
                         primary: '#f97316', 
                         primaryHover: '#ea580c', 
-                        // Warm Dark Theme
                         warmDark: '#1c1715',
                         warmLighter: '#261f1c',
                     }
@@ -30,7 +28,6 @@
     </script>
 
     <style>
-        /* FIXED: Removed redundant body CSS block */
         .glass-panel {
             background: rgba(38, 31, 28, 0.6);
             backdrop-filter: blur(12px);
@@ -44,15 +41,13 @@
         }
     </style>
 </head>
-<body class="bg-warmDark text-gray-300 font-sans antialiased selection:bg-primary selection:text-white">
+<body class="bg-warmDark text-gray-300 font-sans antialiased">
 
     <nav class="fixed w-full z-50 glass-panel border-b border-white/5 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-24">
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="index.html">
-                        <img src="logo.png" alt="Royal RP Logo" class="h-14 w-auto object-contain transition transform hover:scale-105">
-                    </a>
+                <div class="flex-shrink-0">
+                    <a href="index.html"><img src="logo.png" alt="Royal RP Logo" class="h-14 w-auto"></a>
                 </div>
                 
                 <div class="hidden md:block">
@@ -64,149 +59,104 @@
                     </div>
                 </div>
 
-                <div class="flex items-center space-x-4">
-                    <a href="login.html" class="text-sm text-gray-400 hover:text-white transition font-medium">Sign In</a>
-                    <a href="register.html" class="bg-primary hover:bg-primaryHover text-white font-semibold py-2 px-6 rounded-full text-sm shadow-[0_0_20px_rgba(249,115,22,0.4)] transition transform hover:-translate-y-0.5 tracking-wide">Register</a>
+                <div class="flex items-center">
+                    
+                    <div id="logged-out-view" class="flex items-center space-x-4">
+                        <a href="login.html" class="text-sm text-gray-400 hover:text-white transition">Sign In</a>
+                        <a href="register.html" class="bg-primary hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-full text-sm shadow-lg transition">Register</a>
+                    </div>
+
+                    <div id="logged-in-view" class="hidden items-center space-x-4">
+                        <div class="flex items-center space-x-2 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                            <i class="fas fa-user-circle text-primary text-lg"></i>
+                            <span id="user-display-name" class="text-sm text-white font-semibold tracking-wide">Player</span>
+                        </div>
+                        <button id="logout-btn" class="text-sm text-gray-400 hover:text-red-400 transition font-medium">
+                            <i class="fas fa-sign-out-alt mr-1"></i> Sign Out
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="pt-36 pb-12 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                <div>
-                    <h1 class="font-heading font-extrabold text-4xl text-white tracking-tight uppercase"><span class="text-primary">Royal RP</span> Forums</h1>
-                    <p class="mt-2 text-gray-400">Welcome to our community. Share your thoughts and stories.</p>
+    <div class="pt-36 pb-12 px-4 max-w-7xl mx-auto">
+        <h1 class="font-heading font-extrabold text-4xl text-white tracking-tight uppercase"><span class="text-primary">Royal RP</span> Forums</h1>
+        <p class="mt-2 text-gray-400">Welcome to our community. Share your thoughts and stories.</p>
+        
+        <div class="mt-12 space-y-6">
+            <div class="glass-panel rounded-3xl p-6 forum-card flex items-center">
+                <div class="w-12 h-12 bg-primary/10 text-primary rounded-2xl flex items-center justify-center text-xl">
+                    <i class="fas fa-bullhorn"></i>
                 </div>
-                <div class="relative">
-                    <input type="text" placeholder="Search forums..." class="bg-warmLighter border border-white/10 rounded-xl px-4 py-3 pl-12 w-full md:w-80 text-white focus:outline-none focus:border-primary transition shadow-xl">
-                    <i class="fas fa-search absolute left-4 top-4 text-gray-500"></i>
+                <div class="ml-6 flex-grow">
+                    <h4 class="text-lg font-bold text-white hover:text-primary cursor-pointer transition">Announcements</h4>
+                    <p class="text-sm text-gray-500">Official server updates and news.</p>
+                </div>
+                <div class="hidden md:flex space-x-8 text-center px-6 border-l border-white/5">
+                    <div><div class="text-white font-bold">124</div><div class="text-xs text-gray-500 uppercase tracking-widest">Threads</div></div>
+                    <div><div class="text-white font-bold">2.4k</div><div class="text-xs text-gray-500 uppercase tracking-widest">Posts</div></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 pb-24">
-        
-        <div class="mb-12">
-            <div class="bg-gradient-to-r from-primary/20 to-transparent border-l-4 border-primary px-5 py-3 mb-4 rounded-r-lg">
-                <h2 class="font-heading font-bold text-xl text-white uppercase tracking-wider">General Discussion</h2>
-            </div>
-            
-            <div class="glass-panel rounded-3xl overflow-hidden divide-y divide-white/5">
-                <div class="forum-card flex flex-col md:flex-row items-center p-6 transition duration-300">
-                    <div class="flex-shrink-0 w-12 h-12 bg-primary/10 text-primary rounded-2xl flex items-center justify-center text-xl mb-4 md:mb-0">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
-                    <div class="md:ml-6 flex-grow text-center md:text-left">
-                        <h4 class="text-lg font-bold text-white hover:text-primary transition cursor-pointer">Announcements & Updates</h4>
-                        <p class="text-sm text-gray-500 mt-1">Follow the latest official updates and server rules.</p>
-                    </div>
-                    <div class="flex space-x-12 mt-4 md:mt-0 px-8 text-center border-l border-white/5">
-                        <div class="w-20"><div class="text-white font-bold text-lg">124</div><div class="text-xs text-gray-500 uppercase tracking-widest">Threads</div></div>
-                        <div class="w-20"><div class="text-white font-bold text-lg">2.4k</div><div class="text-xs text-gray-500 uppercase tracking-widest">Posts</div></div>
-                    </div>
-                    <div class="hidden lg:block ml-12 w-56 text-right">
-                        <div class="text-xs text-primary font-bold uppercase tracking-wider mb-1">Last Post</div>
-                        <div class="text-sm text-white truncate hover:underline cursor-pointer">Banking System v2.0 Update</div>
-                        <div class="text-xs text-gray-500 italic mt-1">by <span class="text-gray-300 font-medium">Admin</span> • 1h ago</div>
-                    </div>
-                </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-                <div class="forum-card flex flex-col md:flex-row items-center p-6 transition duration-300">
-                    <div class="flex-shrink-0 w-12 h-12 bg-white/5 text-gray-400 rounded-2xl flex items-center justify-center text-xl mb-4 md:mb-0">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <div class="md:ml-6 flex-grow text-center md:text-left">
-                        <h4 class="text-lg font-bold text-white hover:text-primary transition cursor-pointer">General Chat</h4>
-                        <p class="text-sm text-gray-500 mt-1">Talk with players about anything outside of roleplay.</p>
-                    </div>
-                    <div class="flex space-x-12 mt-4 md:mt-0 px-8 text-center border-l border-white/5">
-                        <div class="w-20"><div class="text-white font-bold text-lg">850</div><div class="text-xs text-gray-500 uppercase tracking-widest">Threads</div></div>
-                        <div class="w-20"><div class="text-white font-bold text-lg">15k</div><div class="text-xs text-gray-500 uppercase tracking-widest">Posts</div></div>
-                    </div>
-                    <div class="hidden lg:block ml-12 w-56 text-right">
-                        <div class="text-xs text-primary font-bold uppercase tracking-wider mb-1">Last Post</div>
-                        <div class="text-sm text-white truncate hover:underline cursor-pointer">Best starter car in the city?</div>
-                        <div class="text-xs text-gray-500 italic mt-1">by <span class="text-gray-300 font-medium">Legend_99</span> • 15m ago</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        // Your Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDZW7T9mxKujkcXoJ81RSp9980xeieGX6k",
+            authDomain: "royelrolplay.firebaseapp.com",
+            projectId: "royelrolplay",
+            storageBucket: "royelrolplay.firebasestorage.app",
+            messagingSenderId: "906026544780",
+            appId: "1:906026544780:web:00eba4b774eb61651ad5a9",
+            measurementId: "G-CHTF9VX0GY"
+        };
 
-        <div class="mb-12">
-            <div class="bg-gradient-to-r from-blue-500/20 to-transparent border-l-4 border-blue-500 px-5 py-3 mb-4 rounded-r-lg">
-                <h2 class="font-heading font-bold text-xl text-white uppercase tracking-wider">In-Character (IC)</h2>
-            </div>
-            
-            <div class="glass-panel rounded-3xl overflow-hidden divide-y divide-white/5">
-                <div class="forum-card flex flex-col md:flex-row items-center p-6 transition duration-300">
-                    <div class="flex-shrink-0 w-12 h-12 bg-blue-500/10 text-blue-400 rounded-2xl flex items-center justify-center text-xl mb-4 md:mb-0">
-                        <i class="fas fa-building-shield"></i>
-                    </div>
-                    <div class="md:ml-6 flex-grow text-center md:text-left">
-                        <h4 class="text-lg font-bold text-white hover:text-blue-400 transition cursor-pointer">Government Factions</h4>
-                        <p class="text-sm text-gray-500 mt-1">LSPD, EMS, and Government applications and press releases.</p>
-                    </div>
-                    <div class="flex space-x-12 mt-4 md:mt-0 px-8 text-center border-l border-white/5">
-                        <div class="w-20"><div class="text-white font-bold text-lg">342</div><div class="text-xs text-gray-500 uppercase tracking-widest">Threads</div></div>
-                        <div class="w-20"><div class="text-white font-bold text-lg">1.2k</div><div class="text-xs text-gray-500 uppercase tracking-widest">Posts</div></div>
-                    </div>
-                    <div class="hidden lg:block ml-12 w-56 text-right">
-                        <div class="text-[11px] text-gray-500 uppercase tracking-widest mt-2 border border-white/10 inline-block px-3 py-1 rounded-full bg-white/5">Public Section</div>
-                    </div>
-                </div>
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
 
-                <div class="forum-card flex flex-col md:flex-row items-center p-6 transition duration-300">
-                    <div class="flex-shrink-0 w-12 h-12 bg-rose-500/10 text-rose-400 rounded-2xl flex items-center justify-center text-xl mb-4 md:mb-0">
-                        <i class="fas fa-mask"></i>
-                    </div>
-                    <div class="md:ml-6 flex-grow text-center md:text-left">
-                        <h4 class="text-lg font-bold text-white hover:text-rose-400 transition cursor-pointer">Illegal Factions</h4>
-                        <p class="text-sm text-gray-500 mt-1">Underground businesses, gang lore, and turf wars.</p>
-                    </div>
-                    <div class="flex space-x-12 mt-4 md:mt-0 px-8 text-center border-l border-white/5">
-                        <div class="w-20"><div class="text-white font-bold text-lg">215</div><div class="text-xs text-gray-500 uppercase tracking-widest">Threads</div></div>
-                        <div class="w-20"><div class="text-white font-bold text-lg">890</div><div class="text-xs text-gray-500 uppercase tracking-widest">Posts</div></div>
-                    </div>
-                    <div class="hidden lg:block ml-12 w-56 text-right">
-                        <div class="text-[11px] text-gray-500 uppercase tracking-widest mt-2 border border-white/10 inline-block px-3 py-1 rounded-full bg-white/5">Public Section</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        // Get UI Elements
+        const loggedOutView = document.getElementById('logged-out-view');
+        const loggedInView = document.getElementById('logged-in-view');
+        const userDisplayName = document.getElementById('user-display-name');
+        const logoutBtn = document.getElementById('logout-btn');
 
-    </main>
+        // Listen for Login State Changes
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is Logged In
+                loggedOutView.classList.add('hidden');
+                
+                // Show logged in view
+                loggedInView.classList.remove('hidden');
+                loggedInView.classList.add('flex');
+                
+                // Extract the first part of the email to use as a display name
+                const username = user.email.split('@')[0];
+                userDisplayName.textContent = username;
+            } else {
+                // User is Logged Out
+                loggedInView.classList.add('hidden');
+                loggedInView.classList.remove('flex');
+                
+                // Show logged out view
+                loggedOutView.classList.remove('hidden');
+            }
+        });
 
-    <footer class="bg-warmDark py-16 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-8">
-            
-            <div class="flex items-center">
-                <img src="logo.png" alt="Royal RP Logo" class="h-12 w-auto opacity-80 hover:opacity-100 transition">
-            </div>
-            
-            <div class="flex space-x-6 items-center">
-                <a href="#" target="_blank" class="transition transform hover:scale-110 hover:-translate-y-1" title="Join our Discord">
-                    <img src="discord.png" alt="Discord" class="w-10 h-10 object-contain drop-shadow-md">
-                </a>
-                <a href="#" target="_blank" class="transition transform hover:scale-110 hover:-translate-y-1" title="Follow us on Facebook">
-                    <img src="communication.png" alt="Facebook" class="w-10 h-10 object-contain drop-shadow-md">
-                </a>
-                <a href="#" target="_blank" class="transition transform hover:scale-110 hover:-translate-y-1" title="Subscribe on YouTube">
-                    <img src="youtube.png" alt="YouTube" class="w-10 h-10 object-contain drop-shadow-md">
-                </a>
-                <a href="#" target="_blank" class="transition transform hover:scale-110 hover:-translate-y-1" title="Follow us on TikTok">
-                    <img src="tik-tok.png" alt="TikTok" class="w-10 h-10 object-contain drop-shadow-md">
-                </a>
-            </div>
-
-            <div class="text-center md:text-right">
-                <p class="text-gray-500 text-xs font-medium mb-1">Not affiliated with Rockstar Games.</p>
-                <p class="text-gray-300 text-sm font-bold">&copy; 2026 Royal RP. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
+        // Handle Logout Button Click
+        logoutBtn.addEventListener('click', () => {
+            signOut(auth).then(() => {
+                window.location.reload(); // Refresh page after logging out
+            }).catch((error) => {
+                console.error("Error logging out:", error);
+            });
+        });
+    </script>
 </body>
 </html>
