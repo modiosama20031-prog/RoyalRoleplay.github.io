@@ -43,7 +43,7 @@
             height: 100vh; 
         }
 
-        /* Particle System (Supreme Style) */
+        /* Particle System */
         .particles-container { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
         .cube { position: absolute; background: rgba(251, 180, 22, 0.08); animation: float 15s infinite linear; }
         @keyframes float { 
@@ -54,7 +54,7 @@
         /* Custom Loader */
         #loader { position: fixed; inset: 0; z-index: 9999; background: #000; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s; }
         
-        /* Glassmorphism Cards */
+        /* Feature & Info Cards */
         .feature-card { 
             background: rgba(255, 255, 255, 0.02); 
             backdrop-filter: blur(12px); 
@@ -92,7 +92,7 @@
     <nav class="bg-xDark/95 backdrop-blur-xl border-b border-white/5 sticky top-0 z-50">
         <div class="max-w-[1500px] mx-auto px-8 flex items-center justify-between h-20">
             <div class="flex items-center space-x-12">
-                <a href="#"><div class="text-2xl font-black italic text-xYellow tracking-tighter">ROYAL<span class="text-white ml-1">ROLEPLAY</span></div></a>
+                <a href="#"><div class="text-2xl font-black italic text-xYellow tracking-tighter">ROYAL<span class="text-white ml-1 font-black">ROLEPLAY</span></div></a>
                 <div class="hidden lg:flex items-center space-x-8 text-[11px] font-bold uppercase tracking-[0.2em]">
                     <a href="#" class="nav-link nav-active">Home</a>
                     <a href="#servers" class="text-gray-400 hover:text-white transition">Our Servers</a>
@@ -115,7 +115,7 @@
     <header class="hero-section flex items-center justify-center text-center">
         <div class="max-w-5xl px-6" data-aos="zoom-out" data-aos-duration="1500">
             <h1 class="font-heading font-black leading-none mb-6 uppercase">
-                <span class="text-xYellow text-5xl md:text-8xl block mb-2 tracking-tight">Welcome To</span>
+                <span class="text-xYellow text-5xl md:text-[80px] block mb-2 tracking-tight">Welcome To</span>
                 <span class="text-white text-6xl md:text-[120px] block tracking-tighter filter drop-shadow-2xl">Royal Roleplay</span>
             </h1>
             <div class="space-y-2 mb-12">
@@ -124,7 +124,7 @@
             </div>
             <div class="flex flex-col md:flex-row items-center justify-center gap-8">
                 <a href="#" class="bg-xBlue hover:bg-blue-700 text-white font-black py-5 px-14 rounded shadow-2xl flex items-center uppercase text-sm tracking-[0.2em] transition-all hover:scale-110">
-                    <i class="fas fa-user-plus mr-3"></i> Register Now
+                    <i class="fas fa-user-plus mr-3"></i> Register
                 </a>
                 <div class="flex items-center space-x-3 bg-white/5 px-6 py-4 rounded-lg backdrop-blur-md border border-white/5">
                     <i class="fas fa-users text-xYellow text-xl"></i>
@@ -175,7 +175,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
                 <div class="text-center group" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-10 text-3xl font-black text-white group-hover:bg-xYellow group-hover:text-black transition-all duration-500">1</div>
+                    <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-10 text-3xl font-black text-white group-hover:bg-xYellow group-hover:text-black transition-all duration-500 shadow-xl shadow-white/5">1</div>
                     <div class="feature-card p-12 rounded-xl">
                         <i class="fab fa-steam text-5xl text-gray-400 mb-8 group-hover:text-xYellow transition"></i>
                         <h4 class="text-white font-black uppercase mb-6 tracking-tighter text-2xl">Legit GTA V</h4>
@@ -183,67 +183,68 @@
                     </div>
                 </div>
                 <div class="text-center group" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-10 text-3xl font-black text-white group-hover:bg-xYellow group-hover:text-black transition-all duration-500">2</div>
+                    <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-10 text-3xl font-black text-white group-hover:bg-xYellow group-hover:text-black transition-all duration-500 shadow-xl shadow-white/5">2</div>
                     <div class="feature-card p-12 rounded-xl">
                         <i class="fas fa-download text-5xl text-gray-400 mb-8 group-hover:text-xYellow transition"></i>
                         <h4 class="text-white font-black uppercase mb-6 tracking-tighter text-2xl">RAGEMP Client</h4>
-                        <p class="text-gray-500 text-[10px] leading-relaxed uppercase tracking-widest mb-6">Install the RAGE Multiplayer client to enter the world of Royal RP.</p>
-                        <a href="https://rage.mp/" target="_blank" class="bg-xYellow text-black px-4 py-2 font-black text-[9px] uppercase tracking-widest">Download Now</a>
+                        <p class="text-gray-500 text-[10px] leading-relaxed uppercase tracking-widest mb-8">Install the RAGE Multiplayer client to enter the world of Royal RP.</p>
+                        <a href="https://rage.mp/" target="_blank" class="bg-xYellow text-black px-6 py-3 font-black text-[10px] uppercase tracking-widest transition-all hover:bg-white">Download RAGEMP</a>
                     </div>
                 </div>
                 <div class="text-center group" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-10 text-3xl font-black text-white group-hover:bg-xYellow group-hover:text-black transition-all duration-500">3</div>
+                    <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-10 text-3xl font-black text-white group-hover:bg-xYellow group-hover:text-black transition-all duration-500 shadow-xl shadow-white/5">3</div>
                     <div class="feature-card p-12 rounded-xl">
                         <i class="fas fa-search text-5xl text-gray-400 mb-8 group-hover:text-xYellow transition"></i>
                         <h4 class="text-white font-black uppercase mb-6 tracking-tighter text-2xl">Join Server</h4>
-                        <p class="text-gray-500 text-[10px] leading-relaxed uppercase tracking-widest">Search for "Royal RolePlay" in the list and begin your story.</p>
+                        <p class="text-gray-500 text-[10px] leading-relaxed uppercase tracking-widest">Search for "Royal RolePlay" in the server list and begin your story.</p>
                     </div>
                 </div>
             </div>
+            <button class="mt-20 bg-xBlue text-white font-black py-5 px-16 rounded shadow-2xl transition transform hover:scale-110 uppercase text-xs tracking-[0.4em]">Start Playing Now</button>
         </div>
     </section>
 
     <section class="py-40 bg-xDark/30">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <h2 class="text-white font-black text-6xl uppercase mb-6" data-aos="fade-up">Server Features</h2>
-            <p class="text-xYellow font-black uppercase tracking-[0.5em] text-sm mb-24" data-aos="fade-up" data-aos-delay="100">Powered by advanced technologies</p>
+            <p class="text-xYellow font-black uppercase tracking-[0.5em] text-sm mb-24" data-aos="fade-up" data-aos-delay="100">Experience the Royal Difference</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <div class="feature-card p-12 rounded-xl text-left" data-aos="fade-up">
-                    <i class="fas fa-bolt text-xYellow text-4xl mb-8"></i>
-                    <h5 class="text-white font-black uppercase tracking-tighter mb-4 text-2xl">Ultra Stable</h5>
-                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Our infrastructure ensures zero lag and maximum uptime for high-intensity RP.</p>
-                    <div class="flex gap-2"><span class="tag tag-yellow">Fast</span><span class="tag tag-blue">Secure</span></div>
+                    <i class="fas fa-server text-xYellow text-4xl mb-8"></i>
+                    <h5 class="text-white font-black uppercase tracking-tighter mb-4 text-2xl">RAGEMP Engine</h5>
+                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Advanced multiplayer modification providing ultra-stable performance and enhanced gameplay mechanisms.</p>
+                    <div class="flex gap-2"><span class="tag tag-yellow">Stable</span><span class="tag tag-blue">Fast</span><span class="tag tag-red">Secure</span></div>
                 </div>
                 <div class="feature-card p-12 rounded-xl text-left" data-aos="fade-up" data-aos-delay="100">
                     <i class="fas fa-door-open text-xYellow text-4xl mb-8"></i>
                     <h5 class="text-white font-black uppercase tracking-tighter mb-4 text-2xl">No Whitelist</h5>
-                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Jump right in! No tedious application process, start your life immediately.</p>
-                    <div class="flex gap-2"><span class="tag tag-green text-black">Instant</span></div>
+                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Jump straight into action! No lengthy application process or waiting periods. Create your story immediately.</p>
+                    <div class="flex gap-2"><span class="tag tag-green text-black">Instant Access</span><span class="tag tag-yellow">No Wait</span></div>
                 </div>
                 <div class="feature-card p-12 rounded-xl text-left" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-building-shield text-xYellow text-4xl mb-8"></i>
+                    <i class="fas fa-balance-scale text-xYellow text-4xl mb-8"></i>
                     <h5 class="text-white font-black uppercase tracking-tighter mb-4 text-2xl">Free Legal Orgs</h5>
-                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Join the Police, EMS, or DOJ for free and build your professional career.</p>
-                    <div class="flex gap-2"><span class="tag tag-blue">LSPD</span><span class="tag tag-red">EMS</span></div>
+                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Join Police, Medical Services, or DOJ without any cost. Build your career in our professional law enforcement.</p>
+                    <div class="flex gap-2"><span class="tag tag-blue">Police</span><span class="tag tag-red">EMS</span><span class="tag tag-yellow">DOJ</span></div>
                 </div>
                 <div class="feature-card p-12 rounded-xl text-left" data-aos="fade-up">
-                    <i class="fas fa-gun text-xYellow text-4xl mb-8"></i>
+                    <i class="fas fa-mask text-xYellow text-4xl mb-8"></i>
                     <h5 class="text-white font-black uppercase tracking-tighter mb-4 text-2xl">Gangs & Families</h5>
-                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Create or join powerful criminal syndicates with territorial control.</p>
+                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Create or join powerful criminal organizations with advanced territory systems and hierarchical rewards.</p>
                     <div class="flex gap-2"><span class="tag tag-red">Mafia</span><span class="tag tag-purple">Cartels</span></div>
                 </div>
                 <div class="feature-card p-12 rounded-xl text-left" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-calendar-star text-xYellow text-4xl mb-8"></i>
-                    <h5 class="text-white font-black uppercase tracking-tighter mb-4 text-2xl">Unique Events</h5>
-                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Weekly community-driven events with rare rewards and grand prizes.</p>
-                    <div class="flex gap-2"><span class="tag tag-yellow">Prizes</span></div>
+                    <i class="fas fa-calendar-check text-xYellow text-4xl mb-8"></i>
+                    <h5 class="text-white font-black uppercase tracking-tighter mb-4 text-2xl">Exclusive Events</h5>
+                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Participate in unique server-wide events, special missions, and holiday competitions with rare rewards.</p>
+                    <div class="flex gap-2"><span class="tag tag-yellow">Prizes</span><span class="tag tag-blue">Special</span></div>
                 </div>
                 <div class="feature-card p-12 rounded-xl text-left" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-car text-xYellow text-4xl mb-8"></i>
+                    <i class="fas fa-car-side text-xYellow text-4xl mb-8"></i>
                     <h5 class="text-white font-black uppercase tracking-tighter mb-4 text-2xl">300+ Vehicles</h5>
-                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Drive a massive collection of custom, imported real-life supercars.</p>
-                    <div class="flex gap-2"><span class="tag tag-blue">Import</span><span class="tag tag-yellow">Luxury</span></div>
+                    <p class="text-gray-500 text-[11px] uppercase mb-8 leading-relaxed">Drive an extensive collection of over 300 vehicles including supercars, motorcycles, and trucks.</p>
+                    <div class="flex gap-2"><span class="tag tag-blue">Imports</span><span class="tag tag-yellow">Custom</span></div>
                 </div>
             </div>
         </div>
@@ -251,7 +252,7 @@
 
     <section class="py-40">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-white font-black text-6xl uppercase mb-24" data-aos="fade-up">Join Our Socials</h2>
+            <h2 class="text-white font-black text-6xl uppercase mb-24" data-aos="fade-up">Join Our Community</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div class="bg-red-600/10 p-16 rounded-3xl border border-red-500/20 group hover:bg-red-600/20 transition-all duration-500" data-aos="zoom-in">
                     <i class="fab fa-youtube text-red-600 text-7xl mb-8 group-hover:scale-110 transition"></i>
@@ -268,8 +269,8 @@
                 <div class="bg-indigo-600/10 p-16 rounded-3xl border border-indigo-500/20 group hover:bg-indigo-600/20 transition-all duration-500" data-aos="zoom-in" data-aos-delay="200">
                     <i class="fab fa-discord text-indigo-500 text-7xl mb-8 group-hover:scale-110 transition"></i>
                     <h4 class="text-white font-black text-4xl mb-2 tracking-tighter">1,351</h4>
-                    <p class="text-gray-400 font-bold uppercase tracking-widest text-[10px]">Community Members</p>
-                    <button class="mt-10 bg-indigo-600 text-white font-black py-3 px-10 rounded-sm text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition">Join Discord</button>
+                    <p class="text-gray-400 font-bold uppercase tracking-widest text-[10px]">Members</p>
+                    <button class="mt-10 bg-indigo-600 text-white font-black py-3 px-10 rounded-sm text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition">Join Server</button>
                 </div>
             </div>
         </div>
@@ -279,7 +280,7 @@
         <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-20">
             <div class="col-span-1 md:col-span-2">
                 <div class="text-3xl font-black italic text-xYellow mb-8 tracking-tighter">ROYAL ROLEPLAY</div>
-                <p class="text-gray-500 text-xs uppercase leading-loose max-w-sm">The most advanced and professional GTA V roleplay experience. Built for the community, powered by imagination. Join us and define your reality.</p>
+                <p class="text-gray-500 text-xs uppercase leading-loose max-w-sm">The most immersive GTA 5 RP server powered by RAGEMP. join thousands of players and begin your journey today.</p>
                 <div class="flex space-x-6 mt-10">
                     <a href="#" class="text-gray-500 hover:text-white text-xl transition"><i class="fab fa-discord"></i></a>
                     <a href="#" class="text-gray-500 hover:text-white text-xl transition"><i class="fab fa-youtube"></i></a>
@@ -305,7 +306,7 @@
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-8 mt-32 pt-10 border-t border-white/5 text-center">
-            <p class="text-gray-600 text-[9px] font-bold uppercase tracking-[0.8em]">© 2026 Royal Roleplay Project • For Gamers by Gamers</p>
+            <p class="text-gray-600 text-[9px] font-bold uppercase tracking-[0.8em]">© 2026 Royal Roleplay Project • Engineered for Immersion</p>
         </div>
     </footer>
 
@@ -323,10 +324,10 @@
             }, 1000);
         });
 
-        // Floating Particles Logic
+        // Background Particles Generator
         const container = document.getElementById('particles');
         const colors = ['#fbb416', '#ffffff', '#2563eb'];
-        for (let i = 0; i < 45; i++) {
+        for (let i = 0; i < 50; i++) {
             const cube = document.createElement('div');
             cube.className = 'cube';
             const size = Math.random() * 12 + 4 + 'px';
