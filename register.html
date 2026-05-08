@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Royal RP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#f97316', 
+                        primaryHover: '#ea580c', 
+                        warmDark: '#1c1715',
+                        // FIXED: Added warmLighter for consistency
+                        warmLighter: '#261f1c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .auth-bg {
+            background-image: 
+                linear-gradient(to right, rgba(28, 23, 21, 0.8) 0%, rgba(28, 23, 21, 0.8) 100%), 
+                url('bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            backdrop-filter: blur(8px);
+        }
+
+        .glass-panel {
+            background: rgba(38, 31, 28, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.4);
+        }
+        
+        .custom-input {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .custom-input:focus {
+            border-color: #f97316;
+            background: rgba(0, 0, 0, 0.4);
+            outline: none;
+            box-shadow: 0 0 15px rgba(249, 115, 22, 0.2);
+        }
+    </style>
+</head>
+<body class="auth-bg min-h-screen flex items-center justify-center text-gray-300 font-sans antialiased selection:bg-primary selection:text-white p-4 py-12">
+
+    <a href="index.html" class="absolute top-8 left-8 text-gray-400 hover:text-white transition flex items-center gap-2 group z-50 hidden md:flex">
+        <div class="w-10 h-10 rounded-full glass-panel flex items-center justify-center group-hover:bg-primary/20 group-hover:border-primary/50 transition">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+        <span class="font-medium text-sm">Back to Home</span>
+    </a>
+
+    <div class="glass-panel w-full max-w-lg rounded-[2rem] p-8 md:p-10 relative overflow-hidden">
+        <div class="absolute -top-20 -left-20 w-40 h-40 bg-primary/30 rounded-full blur-[50px]"></div>
+        
+        <div class="text-center mb-8 relative z-10">
+            <img src="logo.png" alt="Royal RP Logo" class="h-12 w-auto object-contain mx-auto mb-6">
+            <h2 class="font-heading font-bold text-3xl text-white mb-2">Create an Account</h2>
+            <p class="text-sm text-gray-400">Join the city and start building your legacy.</p>
+        </div>
+
+        <form action="#" method="POST" class="space-y-5 relative z-10">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Username</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-500">
+                            <i class="fas fa-user-tag"></i>
+                        </div>
+                        <input type="text" placeholder="John_Doe" class="custom-input w-full rounded-xl py-3 pl-11 pr-4 text-white text-sm" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Email Address</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-500">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <input type="email" placeholder="email@example.com" class="custom-input w-full rounded-xl py-3 pl-11 pr-4 text-white text-sm" required>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Password</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-500">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <input type="password" placeholder="Create a strong password" class="custom-input w-full rounded-xl py-3 pl-11 pr-4 text-white text-sm" required>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Confirm Password</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-500">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <input type="password" placeholder="Repeat your password" class="custom-input w-full rounded-xl py-3 pl-11 pr-4 text-white text-sm" required>
+                </div>
+            </div>
+
+            <div class="flex items-start mt-2">
+                <input type="checkbox" id="terms" required class="mt-1 w-4 h-4 rounded border-gray-600 bg-gray-700 text-primary focus:ring-primary focus:ring-offset-gray-900">
+                <label for="terms" class="ml-2 block text-sm text-gray-400 cursor-pointer">
+                    I agree to the <a href="#" class="text-primary hover:underline">Server Rules</a> and <a href="#" class="text-primary hover:underline">Terms of Service</a>.
+                </label>
+            </div>
+
+            <button type="submit" class="w-full bg-gradient-to-r from-primary to-amber-500 hover:from-primaryHover hover:to-orange-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-[0_0_20px_rgba(249,115,22,0.3)] transition transform hover:-translate-y-0.5 tracking-wide mt-6">
+                Create Account
+            </button>
+        </form>
+
+        <p class="mt-8 text-center text-sm text-gray-400 relative z-10">
+            Already have an account? 
+            <a href="login.html" class="text-primary hover:text-white font-semibold transition">Sign in instead</a>
+        </p>
+    </div>
+
+</body>
+</html>
