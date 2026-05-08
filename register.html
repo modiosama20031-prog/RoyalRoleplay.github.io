@@ -18,17 +18,19 @@
 <body class="auth-bg min-h-screen flex items-center justify-center p-4 text-gray-300">
     <div class="glass-panel w-full max-w-lg rounded-[2rem] p-10 relative overflow-hidden">
         <div class="text-center mb-8">
-            <img src="logo.png" class="h-12 mx-auto mb-6">
+            <img src="logo.png" alt="Royal RP Logo" class="h-12 mx-auto mb-6">
             <h2 class="text-3xl font-bold text-white">Join the City</h2>
         </div>
-        <form id="register-form" class="space-y-4">
+        
+        <form id="register-form" onsubmit="event.preventDefault();" class="space-y-4">
             <div class="grid grid-cols-1 gap-4">
-                <input type="email" id="reg-email" placeholder="Email" required class="bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none">
+                <input type="email" id="reg-email" placeholder="Email" required class="bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none w-full">
             </div>
             <input type="password" id="reg-password" placeholder="Password (6 characters minimum)" required class="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none">
             <input type="password" id="reg-confirm" placeholder="Confirm Password" required class="w-full bg-black/20 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-primary outline-none">
             <button type="submit" class="w-full bg-primary hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl transition shadow-lg mt-4">Create Account</button>
         </form>
+        
         <p class="mt-8 text-center text-sm">Already registered? <a href="login.html" class="text-primary font-semibold">Sign In</a></p>
     </div>
 
@@ -50,26 +52,25 @@
         const auth = getAuth(app);
 
         document.getElementById('register-form').addEventListener('submit', (e) => {
-            e.preventDefault(); // بيمنع الصفحة إنها تعمل ريفريش
+            e.preventDefault(); 
             
             const email = document.getElementById('reg-email').value;
             const password = document.getElementById('reg-password').value;
             const confirmPassword = document.getElementById('reg-confirm').value;
 
-            // التأكد إن الباسورد متطابق
             if(password !== confirmPassword) {
-                alert("الباسورد مش متطابق يا بطل، راجعه تاني!");
+                alert("Passwords do not match. Please try again!");
                 return;
             }
 
-            // إرسال البيانات لفايربيز
+            // Send data to Firebase
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    alert("تم إنشاء الحساب بنجاح! يا مرحب بيك في Royal RP.");
-                    window.location.href = "login.html"; // هيحوله لصفحة تسجيل الدخول
+                    alert("Account created successfully! Welcome to Royal RP.");
+                    window.location.href = "login.html"; 
                 })
                 .catch((error) => {
-                    alert("حصلت مشكلة: " + error.message);
+                    alert("Error: " + error.message);
                 });
         });
     </script>
