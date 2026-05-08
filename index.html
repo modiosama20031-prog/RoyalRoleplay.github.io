@@ -58,11 +58,11 @@
                 </div>
                 
                 <div class="hidden md:block">
-                    <div class="flex items-center space-x-8 bg-white/5 px-6 py-2 rounded-full border border-white/10">
-                        <a href="index.html" class="text-white border-b-2 border-primary pb-1 font-bold text-sm transition">Home</a>
-                        <a href="#features" class="text-gray-300 font-medium text-sm hover:text-white transition">Features</a>
-                        <a href="#start" class="text-gray-300 font-medium text-sm hover:text-white transition">How to Play</a>
-                        <a href="forum.html" class="text-gray-300 font-medium text-sm hover:text-white transition">Forum</a>
+                    <div id="nav-links" class="flex items-center space-x-8 bg-white/5 px-6 py-2 rounded-full border border-white/10">
+                        <a href="index.html" class="nav-item text-white border-b-2 border-primary pb-1 font-bold text-sm transition">Home</a>
+                        <a href="#features" class="nav-item text-gray-300 font-medium text-sm hover:text-white transition">Features</a>
+                        <a href="#start" class="nav-item text-gray-300 font-medium text-sm hover:text-white transition">How to Play</a>
+                        <a href="forum.html" class="nav-item text-gray-300 font-medium text-sm hover:text-white transition">Forum</a>
                     </div>
                 </div>
 
@@ -176,26 +176,15 @@
 
     <footer class="bg-warmDark py-16 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-8">
-            
             <div class="flex items-center">
                 <img src="logo.png" alt="Royal RP Logo" class="h-12 w-auto opacity-80 hover:opacity-100 transition">
             </div>
-            
             <div class="flex space-x-6 items-center">
-                <a href="#" target="_blank" class="transition transform hover:scale-110 hover:-translate-y-1" title="Join our Discord">
-                    <img src="discord.png" alt="Discord" class="w-10 h-10 object-contain drop-shadow-md">
-                </a>
-                <a href="#" target="_blank" class="transition transform hover:scale-110 hover:-translate-y-1" title="Follow us on Facebook">
-                    <img src="communication.png" alt="Facebook" class="w-10 h-10 object-contain drop-shadow-md">
-                </a>
-                <a href="#" target="_blank" class="transition transform hover:scale-110 hover:-translate-y-1" title="Subscribe on YouTube">
-                    <img src="youtube.png" alt="YouTube" class="w-10 h-10 object-contain drop-shadow-md">
-                </a>
-                <a href="#" target="_blank" class="transition transform hover:scale-110 hover:-translate-y-1" title="Follow us on TikTok">
-                    <img src="tik-tok.png" alt="TikTok" class="w-10 h-10 object-contain drop-shadow-md">
-                </a>
+                <a href="#" target="_blank"><img src="discord.png" class="w-10 h-10 object-contain"></a>
+                <a href="#" target="_blank"><img src="communication.png" class="w-10 h-10 object-contain"></a>
+                <a href="#" target="_blank"><img src="youtube.png" class="w-10 h-10 object-contain"></a>
+                <a href="#" target="_blank"><img src="tik-tok.png" class="w-10 h-10 object-contain"></a>
             </div>
-
             <div class="text-center md:text-right">
                 <p class="text-gray-500 text-xs font-medium mb-1">Not affiliated with Rockstar Games.</p>
                 <p class="text-gray-300 text-sm font-bold">&copy; 2026 Royal RP. All rights reserved.</p>
@@ -203,5 +192,38 @@
         </div>
     </footer>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sections = document.querySelectorAll("section, header");
+            const navLinks = document.querySelectorAll(".nav-item");
+
+            window.addEventListener("scroll", () => {
+                let current = "index.html";
+
+                sections.forEach((section) => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 150) {
+                        if(section.id) {
+                            current = "#" + section.id;
+                        } else {
+                            current = "index.html";
+                        }
+                    }
+                });
+
+                navLinks.forEach((link) => {
+                    if (link.getAttribute("href") === "forum.html") return;
+
+                    link.classList.remove("text-white", "border-b-2", "border-primary", "pb-1", "font-bold");
+                    link.classList.add("text-gray-300", "font-medium");
+
+                    if (link.getAttribute("href") === current) {
+                        link.classList.remove("text-gray-300", "font-medium");
+                        link.classList.add("text-white", "border-b-2", "border-primary", "pb-1", "font-bold");
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
